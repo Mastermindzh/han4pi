@@ -1,4 +1,11 @@
-# han4pi
-Rapsberry pi cursussen van de HAN door Johan Korten, Simon Baars, Thomas Nobel en Rick van Lieshout
+![De hogeschool van Arnhem en Nijmegen](http://i.imgur.com/rUyEbpq.png)
 
-Organisatie:
+# han4pi
+Rapsberry pi cursussen van de HAN
+
+**Organisatie:**
+- Simon Baars
+- Johan Korten
+- Rick van Lieshout
+- Ron nabuurs
+- Thomas Nobel
