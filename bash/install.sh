@@ -1,14 +1,28 @@
 #!/bin/bash
 
+#enter your user settings right here.
+
+#hostname, name that will appear on the internal internet(unique)
+HOSTNAME='Han'
+USERNAME='pi'
+PASSWORD='raspberry'
+
 #clear previous commands
 clear
+
+#check for root
+if [[ $EUID -ne 0 ]]; then
+   echo "Dit script moet met root rechten worden uitgevoerd.
+Dit kunt u doen door het aan te roepen met sudo. (sudo bash scriptnaam.sh)
+   " 1>&2
+   exit 1
+fi
 
 #print a little welcome page
 RED='\033[0;31m'
 BLUE='\033[0;34m'
 WHITE='\033[0;37m'
 NC='\033[0m'
-
 echo -e ${BLUE}10011110000101000010100101000011011011010000001001011000010001111111110011111111
 echo -e ${BLUE}01101001110101110001000010111101001101000011101000011101000001110111101100101110
 echo -e ${BLUE}10001010101110001111011110111111011101100110111010001010101001011001111010011001
@@ -37,3 +51,12 @@ echo -e ${NC}
 
 #initial welcome message
 echo "Welkom bij het han4pi installatie programma"
+
+
+#change username of user
+usermod -l $USERNAME pi
+usermod -m -d /home/$USERNAME $USERNAME
+
+
+#download han4pi files (all of them, including backgrounds and examples
+git clone https://github.com/Mastermindzh/han4pi.git /home/$USERNAME/han4pi
