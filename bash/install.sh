@@ -54,6 +54,8 @@ echo -e ${NC}
 echo "Welkom bij het han4pi installatie programma"
 
 #change username of user
+#we should really encapsulate this in an if statement.
+#This will throw an error if the user exists or the old user (being pi in this case) cannot be found
 usermod -l $USERNAME pi
 usermod -m -d /home/$USERNAME $USERNAME
 
