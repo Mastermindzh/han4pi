@@ -2,11 +2,14 @@
 
 #enter your user settings right here.
 
-#hostname, name that will appear on the internal internet(unique)
-HOSTNAME='Han'
-USERNAME='pi'
-PASSWORD='raspberry'
-VERSION='1'
+
+HOSTNAME='Han'			# hostname, name that will appear on the internal internet(unique)
+USERNAME='pi'			# username for the regular user
+PASSWORD='raspberry'	# password for the regular user
+
+
+#other variables the script needs
+VERSION='0'
 SKIP=false
 
 #check if flags are passed
@@ -78,12 +81,13 @@ if [ "$SKIP" = false ]; then
 	echo "Druk op enter om de installatie te starten."
 	read null
 	
-	#change username of user
-	#we should really encapsulate this in an if statement.
-	#This will throw an error if the user exists or the old user (being pi in this case) cannot be found
+	# change username of user pi
+		
+		#we should really encapsulate this in an if statement.
+		#This will throw an error if the user exists or the old user (being pi in this case) cannot be found
+	
 	#usermod -l $USERNAME pi
 	#usermod -m -d /home/$USERNAME $USERNAME
-
 
 	#remove any old copy of han4pi
 	rm -rf "/home/$USERNAME/han4pi"
@@ -91,8 +95,6 @@ if [ "$SKIP" = false ]; then
 	git clone https://github.com/Mastermindzh/han4pi.git "/home/$USERNAME/han4pi"
 	
 fi #end of skip
-
-echo 'skipped'
 
 #check wether version is the same
 newver=$(bash "/home/$USERNAME/han4pi/install.sh"  -v)
@@ -105,3 +107,5 @@ then
 	read null
 	bash "/home/$USERNAME/han4pi/install.sh" -s
 fi
+
+echo 'skipped'
