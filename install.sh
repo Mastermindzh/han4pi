@@ -6,7 +6,7 @@
 HOSTNAME='Han'
 USERNAME='pi'
 PASSWORD='raspberry'
-VERSION='0.2'
+VERSION='1'
 
 #check if flags are passed
 while getopts 'hlv' flag; do
@@ -83,5 +83,12 @@ rm -rf "/home/$USERNAME/han4pi"
 #download han4pi files (all of them, including backgrounds and examples
 git clone https://github.com/Mastermindzh/han4pi.git "/home/$USERNAME/han4pi"
 
-#newver=$(bash "/home/$USERNAME/han4pi/install.sh -v")
-
+#check wether version is the same
+newver=$(bash "/home/$USERNAME/han4pi/install.sh"  -v)
+if [ "$newver" -ne "$VERSION" ]
+then
+	echo "Uw installatiescript is outdated."
+	echo "We zullen het nieuwe script gebruiken, dat kunt u vinden in: /home/$USERNAME/han4pi"
+	echo "Druk op enter om door te gaan..."
+	read null
+fi
