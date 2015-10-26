@@ -8,8 +8,21 @@ USERNAME='pi'
 PASSWORD='raspberry'
 VERSION='0.2'
 
-#clear previous commands
-clear
+#check if flags are passed
+while getopts 'hlv' flag; do
+  case "${flag}" in
+    h) echo "This is the help menu" 
+	flagDetection='true'
+	exit 1;;
+    l) 	cat "$(pwd)/LICENSE"
+	flagDetection='true' 
+	exit 1;;
+	v) echo $VERSION
+	exit 1;;
+    *) echo "Unexpected option ${flag}"
+	exit 1;;
+  esac
+done
 
 #check for root
 if [[ $EUID -ne 0 ]]; then
@@ -18,6 +31,9 @@ Dit kunt u doen door het aan te roepen met sudo. (sudo bash scriptnaam.sh)
    " 1>&2
    exit 1
 fi
+
+#clear previous commands
+clear
 
 #print a little welcome page
 RED='\033[0;31m'
@@ -52,13 +68,20 @@ echo -e ${NC}
 
 #initial welcome message
 echo "Welkom bij het han4pi installatie programma"
+echo "Druk op enter om de installatie te starten."
+read null
 
 #change username of user
 #we should really encapsulate this in an if statement.
 #This will throw an error if the user exists or the old user (being pi in this case) cannot be found
-usermod -l $USERNAME pi
-usermod -m -d /home/$USERNAME $USERNAME
+#usermod -l $USERNAME pi
+#usermod -m -d /home/$USERNAME $USERNAME
 
 
+#remove any old copy of han4pi
+rm -rf "/home/$USERNAME/han4pi"
 #download han4pi files (all of them, including backgrounds and examples
-git clone https://github.com/Mastermindzh/han4pi.git /home/$USERNAME/han4pi
+git clone https://github.com/Mastermindzh/han4pi.git "/home/$USERNAME/han4pi"
+
+#newver=$(bash "/home/$USERNAME/han4pi/install.sh -v")
+
