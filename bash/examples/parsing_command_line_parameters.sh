@@ -1,24 +1,24 @@
 #!/bin/bash
  
- #loop throught parameters and check for a,b or v
- # : is used to disable verbose output
+ #Kijk of de parameter a b of v is meegegven
+ # : wordt gebruikt om verbose output tegen te gaan
 while getopts ":abv" opt; do
   
-  #start a case to determine what code to run.
+  #Bekijk in een case statement welke code uitgevoerd moet worden
   case $opt in
-    #if argument a is passed run
+    #als a is meegegeven dan doe:
     a)
-      echo "-a was triggered, Parameter: $OPTARG" 
+      echo "-a is meegegeven, Parameter: $OPTARG" 
       ;;
-    #if argument b is passed run
+    #als b is meegegeven dan doe:
     b)
-      echo "-b was triggered, Parameter: $OPTARG" 
+      echo "-b is meegegeven, Parameter: $OPTARG" 
 	  ;;
-    #if argument v is passed run
+    #als v is meegegeven dan doe:
     v)
-	  echo "-v was triggered, Parameter: $OPTARG"
+	  echo "-v is meegegeven, Parameter: $OPTARG"
 	  ;;
-    #if argument is not in our list of arguments (a,b and v)
+    #als is not in our list of arguments (a,b and v)
     \?)
       echo "Invalid option: -$OPTARG" >&2
       exit 1

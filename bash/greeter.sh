@@ -1,10 +1,10 @@
 #!/bin/bash
-# Start with a fresh screen
+# Maak het scherm leeg
 clear
 
-# Get the date
+# sla de datum op
 h=`date +%H`
-#set up array of months and days
+#Maak arrays van dagen en maanden
 MONTHS=(NULL Januari Februari Maart April Mei Juni Juli Augustus September October November December)
 DAYS=(NULL Maandag Dinsdag Woensdag Donderdag Vrijdag Zaterdag Zondag)
 
@@ -19,13 +19,13 @@ echo "                        | |       "
 echo "                        |_|       "
 
 
-# if the hour (H) is lower than 12 it's morning
+# Als het uur onder de 12 is dan is het sochtends
 if [ $h -lt 12 ]; then
   echo "Goedemorgen, $(whoami)!"
-# elseif hour is less than 18 (it's midday)
+# als het uur onder de 18 is (maar niet onder de 12) dan is het middag
 elif [ $h -lt 18 ]; then
   echo "Goedemiddag, $(whoami)!"
-# if neither of those are true it's evening
+# Anders is het savonds
 else 
   echo "Goedeavond, $(whoami)!"
 fi
@@ -33,7 +33,7 @@ echo ""
 echo "Welkom bij het han4pi leerprogramma!"
 echo "Hieronder staat vast wat belangrijke informatie."
 echo "Om te zien wat ik allemaal kan doen typ je 'help'"
-# draw a horizontal line
+# Horizontaal lijntje
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
 
 

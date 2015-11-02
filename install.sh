@@ -1,18 +1,18 @@
 #!/bin/bash
 
-#enter your user settings right here.
+#Geef de gebruikersinformatie hier op
 
 
-HOSTNAME='Han'			# hostname, name that will appear on the internal internet(unique)
-USERNAME='pi'			# username for the regular user
-PASSWORD='raspberry'	# password for the regular user
+HOSTNAME='Han'			# hostname, De netwerknaam (moet uniek zijn)
+USERNAME='pi'			# Gebruikersnaam voor de gebruiker
+PASSWORD='raspberry'	# wachtwoord voor de gebruiker
 
 
-#other variables the script needs
+#Andere variabelen die noodzakelijk zijn voor het script
 VERSION='0'
 SKIP=false
 
-#check if flags are passed
+#Bekijk of er parameters meegegeven zijn.
 while getopts 'hlvs' flag; do
   case "${flag}" in
     h) echo "This is the help menu" 
@@ -29,7 +29,7 @@ while getopts 'hlvs' flag; do
   esac
 done
 
-#check for root
+#Controlleer op root
 if [[ $EUID -ne 0 ]]; then
    echo "Dit script moet met root rechten worden uitgevoerd.
 Dit kunt u doen door het aan te roepen met sudo. (sudo bash scriptnaam.sh)
@@ -37,10 +37,10 @@ Dit kunt u doen door het aan te roepen met sudo. (sudo bash scriptnaam.sh)
    exit 1
 fi
 
-#clear previous commands
+# Even weer een schoon scherm tonen
 clear
 
-#set colour codes
+#Zet wat kleur variabelen
 RED='\033[0;31m'
 BLUE='\033[0;34m'
 WHITE='\033[0;37m'
@@ -48,7 +48,7 @@ NC='\033[0m'
 
 if [ "$SKIP" = false ]; then
 
-	#print a little welcome page
+	#Print het han logo
 	
 	echo -e ${BLUE}10011110000101000010100101000011011011010000001001011000010001111111110011111111
 	echo -e ${BLUE}01101001110101110001000010111101001101000011101000011101000001110111101100101110
@@ -72,31 +72,28 @@ if [ "$SKIP" = false ]; then
 	echo -e ${BLUE}01100000011000101010100111000101000100001011111101111010001111001110100001010011
 	echo -e ${BLUE}00011001011111011101001000100100001011100111100101110111010101001001101011100000
 	echo -e ${BLUE}01100001011010110110010010110100110100110010011011111100111000100000001101101111
-	#reset the prompt color
+	#Reset de kleur terug naar de default
 	echo -e ${NC}
 
 
-	#initial welcome message
-	echo "Welkom bij het han4pi installatie programma"
+	#heet de gebruiker welkom
+	echo "Welkom bij het han4pi installatie programma."
 	echo "Druk op enter om de installatie te starten."
 	read null
 	
-	# change username of user pi
-		
-		#we should really encapsulate this in an if statement.
-		#This will throw an error if the user exists or the old user (being pi in this case) cannot be found
+	# Verander de username
 	
-	#usermod -l $USERNAME pi
-	#usermod -m -d /home/$USERNAME $USERNAME
+	usermod -l $USERNAME pi
+	usermod -m -d /home/$USERNAME $USERNAME
 
-	#remove any old copy of han4pi
+	#Verwijder oude han4pi map als die aanwezig is
 	rm -rf "/home/$USERNAME/han4pi"
-	#download han4pi files (all of them, including backgrounds and examples
+	#download nieuwe han4pi files
 	git clone https://github.com/Mastermindzh/han4pi.git "/home/$USERNAME/han4pi"
 	
 fi #end of skip
 
-#check wether version is the same
+# Controlleer of de scriptversies gelijk zijn.
 newver=$(bash "/home/$USERNAME/han4pi/install.sh"  -v)
 if [ "$newver" -ne "$VERSION" ]
 then
