@@ -85,7 +85,7 @@ if [ "$SKIP" = false ]; then
 	
 	usermod -l $USERNAME pi
 	usermod -m -d /home/$USERNAME $USERNAME
-
+	
 	#Verwijder oude han4pi map als die aanwezig is
 	rm -rf "/home/$USERNAME/han4pi"
 	#download nieuwe han4pi files
@@ -104,5 +104,9 @@ then
 	read null
 	bash "/home/$USERNAME/han4pi/install.sh" -s
 fi
+
+#set wallpaper
+cp /home/$USERNAME/han4pi/images/wallpaper.jpg /usr/share/raspberrypi-artwork/han4pi.jpg
+cp /home/$USERNAME/han4pi/bash/resources/desktop-items-0.conf /home/$USERNAME/.config/pcmanfm/LXDE-pi/desktop-items-0.conf 
 
 echo 'skipped'
