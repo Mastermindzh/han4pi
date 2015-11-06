@@ -37,6 +37,14 @@ Dit kunt u doen door het aan te roepen met sudo. (sudo bash scriptnaam.sh)
    exit 1
 fi
 
+#controlleer of github.com werkt, zo niet dan kan het script niet verder gaan
+curl http://www.github.com.com 2>/dev/null > /tmp/webtest.txt
+if [[ $? != 0 ]]; then
+  echo 'Er kan geen verbinding met github gemaakt worden.'
+  echo 'Een verbinding met github is vereist en de installatie zal daarom gestopt worden.'
+  exit 1
+fi
+
 # Even weer een schoon scherm tonen
 clear
 
@@ -83,30 +91,36 @@ if [ "$SKIP" = false ]; then
 	
 	# Verander de username
 	
-	usermod -l $USERNAME pi
-	usermod -m -d /home/$USERNAME $USERNAME
+	usermod -l "$USERNAME" pi
+	usermod -m -d /home/"$USERNAME" "$USERNAME"
 	
 	#Verwijder oude han4pi map als die aanwezig is
-	rm -rf "/home/$USERNAME/han4pi"
+	rm -rf "/home/"$USERNAME"/han4pi"
 	#download nieuwe han4pi files
-	git clone https://github.com/Mastermindzh/han4pi.git "/home/$USERNAME/han4pi"
+	git clone https://github.com/Mastermindzh/han4pi.git "/home/"$USERNAME"/han4pi"
 	
 fi #end of skip
 
 # Controlleer of de scriptversies gelijk zijn.
-newver=$(bash "/home/$USERNAME/han4pi/install.sh"  -v)
+newver=$(bash "/home/"$USERNAME"/han4pi/install.sh"  -v)
 if [ "$newver" -ne "$VERSION" ]
 then
 	clear
 	echo -e ${RED}"Uw installatiescript is outdated."${NC}
-	echo "We zullen het nieuwe script gebruiken, dat kunt u vinden in: /home/$USERNAME/han4pi"
+	echo "We zullen het nieuwe script gebruiken, dat kunt u vinden in: /home/"$USERNAME"/han4pi"
 	echo "Druk op enter om door te gaan..."
 	read null
-	bash "/home/$USERNAME/han4pi/install.sh" -s
+	bash "/home/"$USERNAME"/han4pi/install.sh" -s
 fi
 
 #set wallpaper
-cp /home/$USERNAME/han4pi/images/wallpaper.jpg /usr/share/raspberrypi-artwork/han4pi.jpg
-cp /home/$USERNAME/han4pi/bash/resources/desktop-items-0.conf /home/$USERNAME/.config/pcmanfm/LXDE-pi/desktop-items-0.conf 
+cp /home/"$USERNAME"/han4pi/images/wallpaper.jpg /usr/share/raspberrypi-artwork/han4pi.jpg
+cp /home/"$USERNAME"/han4pi/bash/resources/desktop-items-0.conf /home/"$USERNAME"/.config/pcmanfm/LXDE-pi/desktop-items-0.conf 
+
+#copy over greeter
+cp /home/"$USERNAME"/han4pi/bash/greeter.sh /home/"$USERNAME"/.han4pi/greeter.sh
+
+echo "bash /home/"$USERNAME"/.han4pi/greeter.sh" >> "/home/"$USERNAME"/.bashrc"
+
 
 echo 'skipped'

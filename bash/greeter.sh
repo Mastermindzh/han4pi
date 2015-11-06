@@ -32,7 +32,6 @@ fi
 echo ""
 echo "Welkom bij het han4pi leerprogramma!"
 echo "Hieronder staat vast wat belangrijke informatie."
-echo "Om te zien wat ik allemaal kan doen typ je 'help'"
 # Horizontaal lijntje
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
 
