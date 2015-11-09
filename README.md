@@ -20,7 +20,9 @@ Gebruik een van de volgende links om door dit document te bladeren:
 Voordat u het han4pi pakket kunt installeren zult u een sd kaartje moeten voorbereiden met de "RASPBIAN" software. U kunt de laatste versie van RASPBIAN downloaden op [deze](https://www.raspberrypi.org/downloads/raspbian/) website. Tevens is er een internetverbinding nodig voor de installatie.
 
 1. Stel het root account in door de volgende commando's in de terminal te geven: 
-`sudo passwd root`
+```
+sudo passwd root
+```
 En vervolgens tweemaal een root wachtwoord in te geven.
 
 2. Klik linksboven in de hoek op "Menu" en kies voor "Shutdown". Uit het menu wat opspringt kiest u "Logout"
