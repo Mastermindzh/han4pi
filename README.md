@@ -5,7 +5,7 @@ Han4pi is een groep enthusiaste studenten die samen met 1 leraar (Johan Korten) 
 
 Gebruik een van de volgende links om door dit document te bladeren:
 
-[TOC]
+[De installatie van het han4pi pakket](#install)
 
 
 
@@ -16,6 +16,7 @@ Gebruik een van de volgende links om door dit document te bladeren:
 - Ron nabuurs
 - Thomas Nobel
 
+<div id = "install"></div>
 ## De installatie van het han4pi pakket
 Voordat u het han4pi pakket kunt installeren zult u een sd kaartje moeten voorbereiden met de "RASPBIAN" software. U kunt de laatste versie van RASPBIAN downloaden op [deze](https://www.raspberrypi.org/downloads/raspbian/) website. Tevens is er een internetverbinding nodig voor de installatie.
 
@@ -41,6 +42,3 @@ Na het wijzigen van de variabelen drukt u op ctrl + x en vervolgens op y gevolgd
 8. Volg de instructies op het scherm.
 9. Herstart de raspberry pi met het volgende commando:
 `reboot`
-
-10. 
-
