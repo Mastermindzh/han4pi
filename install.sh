@@ -2,7 +2,7 @@
 
 #Geef de gebruikersinformatie hier op
 
-
+#Gebruikers variabelen
 HOSTNAME='Han'			# hostname, De netwerknaam (moet uniek zijn)
 USERNAME='pi'			# Gebruikersnaam voor de gebruiker
 PASSWORD='raspberry'	# wachtwoord voor de gebruiker
@@ -99,6 +99,9 @@ if [ "$SKIP" = false ]; then
 	#download nieuwe han4pi files
 	git clone https://github.com/Mastermindzh/han4pi.git "/home/"$USERNAME"/han4pi"
 	
+	#verwijder het installatie script uit de gebruikersmap.
+	rm "/home/"$USERNAME"/han4pi/install.sh"
+	
 fi #end of skip
 
 # Controlleer of de scriptversies gelijk zijn.
@@ -113,14 +116,16 @@ then
 	bash "/home/"$USERNAME"/han4pi/install.sh" -s
 fi
 
-#set wallpaper
+#Stel de han4pi wallpaper in
 cp /home/"$USERNAME"/han4pi/images/wallpaper.jpg /usr/share/raspberrypi-artwork/han4pi.jpg
 cp /home/"$USERNAME"/han4pi/bash/resources/desktop-items-0.conf /home/"$USERNAME"/.config/pcmanfm/LXDE-pi/desktop-items-0.conf 
 
-#copy over greeter
+#Kopieer de greeter naar een verborgen map
+mkdir /home/"$USERNAME"/.han4pi
 cp /home/"$USERNAME"/han4pi/bash/greeter.sh /home/"$USERNAME"/.han4pi/greeter.sh
 
+#Zorg ervoor dat de greeter wordt uitgevoerd bij elke start van een terminal
 echo "bash /home/"$USERNAME"/.han4pi/greeter.sh" >> "/home/"$USERNAME"/.bashrc"
 
 
-echo 'skipped'
+
