@@ -1,7 +1,7 @@
 <img src = "http://i.imgur.com/rUyEbpq.png" style = "float:right; width:300px;" />
-<div style = "float:left;">
+
 <img src = "http://i.imgur.com/55jM65n.png" style = "float:left; padding-right:15px;" /> <span style = "font-weight: bold; font-size: 400%; margin-top:-10px;">han4pi</span>
-</div>
+
 Han4pi is een groep enthusiaste studenten die samen met 1 leraar (Johan Korten) workshops organiseren met de Raspberry pi microcomputer. Dit doen zij voor de Hogeschool van Arnhem en Nijmegen.
 
 Gebruik een van de volgende links om door dit document te bladeren:
