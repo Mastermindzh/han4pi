@@ -4,7 +4,7 @@ Han4pi is een groep enthusiaste studenten die samen met 1 leraar (Johan Korten) 
 
 Gebruik een van de volgende links om door dit document te bladeren:
 
-[De installatie van het han4pi pakket](#install)
+[De installatie van het han4pi pakket](#user-content-install)
 
 
 
