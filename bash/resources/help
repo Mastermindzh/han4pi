@@ -1,0 +1,8 @@
+Welkom bij het hulpmenu.
+
+U kunt de volgende flags meegeven:
+
+h: toon dit hulpmenu
+l: toon de license informatie
+v: vraag het versienummer op
+s: skip een gedeelte van het script

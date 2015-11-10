@@ -1,21 +1,18 @@
 #!/bin/bash
 
-#Geef de gebruikersinformatie hier op
-
 #Gebruikers variabelen
-HOSTNAME='Han'			# hostname, De netwerknaam (moet uniek zijn)
-USERNAME='pi'			# Gebruikersnaam voor de gebruiker
-PASSWORD='raspberry'	# wachtwoord voor de gebruiker
-
+HOSTNAME='HAN'	# hostname die deze pi moet krijgen
+USERNAME='pi'	# Gebruikersnaam van de gebruiker waarvoor han4pi geinstalleerd moet worden.
 
 #Andere variabelen die noodzakelijk zijn voor het script
 VERSION='0'
 SKIP=false
+ret=false
 
 #Bekijk of er parameters meegegeven zijn.
 while getopts 'hlvs' flag; do
   case "${flag}" in
-    h) echo "This is the help menu" 
+    h) echo "$(pwd)/bash/resources/help" 
 	flagDetection=true
 	exit 1;;
     l) 	cat "$(pwd)/LICENSE"
@@ -28,6 +25,17 @@ while getopts 'hlvs' flag; do
 	exit 1;;
   esac
 done
+
+#controlleer of de opgegeven gebruikersnaam bij een gebruiker hoort.
+getent passwd "$USERNAME" >/dev/null 2>&1 && ret=true
+
+if ! $ret; then
+    echo "Er is geen gebruikersnaam bij de ingestelde gebruikersnaam."
+    exit 0
+fi
+
+#controlleer of de opgegeven gebruiker een home map heeft, zo niet maak er een.
+mkdir -p /home/"$USERNAME"
 
 #Controlleer op root
 if [[ $EUID -ne 0 ]]; then
@@ -83,19 +91,17 @@ if [ "$SKIP" = false ]; then
 	#Reset de kleur terug naar de default
 	echo -e ${NC}
 
-
 	#heet de gebruiker welkom
 	echo "Welkom bij het han4pi installatie programma."
 	echo "Druk op enter om de installatie te starten."
 	read null
 	
-	# Verander de username
-	
-	usermod -l "$USERNAME" pi
-	usermod -m -d /home/"$USERNAME" "$USERNAME"
+	#verander de hostname indien gewenst.
+	echo $HOSTNAME > /etc/hostname
 	
 	#Verwijder oude han4pi map als die aanwezig is
 	rm -rf "/home/"$USERNAME"/han4pi"
+	
 	#download nieuwe han4pi files
 	git clone https://github.com/Mastermindzh/han4pi.git "/home/"$USERNAME"/han4pi"
 	
