@@ -127,5 +127,18 @@ cp /home/"$USERNAME"/han4pi/bash/greeter.sh /home/"$USERNAME"/.han4pi/greeter.sh
 #Zorg ervoor dat de greeter wordt uitgevoerd bij elke start van een terminal
 echo "bash /home/"$USERNAME"/.han4pi/greeter.sh" >> "/home/"$USERNAME"/.bashrc"
 
+#zet de keyboard map op US, de standaard in Nederland.
+setxkbmap us
+
+#update en upgrade het systeem en installeer vervolgens de benodigde packages.
+apt-get -y update && apt-get -y upgrade
+
+#installeer evt. benodigde software.
+apt-get -y install
+
+#maak de directory voor autostart apps en voeg daar lxterminal aan toe
+mkdir /home/"$USERNAME"/.config/autostart
+cp /home/"$USERNAME"/han4pi/bash/resources/start-terminal.desktop /home/"$USERNAME"/.config/autostart/
+
 
 

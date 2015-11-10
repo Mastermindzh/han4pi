@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=LXTerminal 
+Type=Application
+Exec=lxterminal
+Terminal=false
+Comment=LXDE terminal
+NoDisplay=false
+Name[en]=Terminal
