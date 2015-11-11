@@ -53,7 +53,7 @@ U krijgt dan een venster met een aantal gegevens (onderstaande afbeelding). De b
 
 ![lsblk](http://i.imgur.com/zooJC6x.png)
 
-Zodra u de regel van het sd kaartje heeft gevonden kijkt u bij de kolom "NAME". De naam zonder nummer is uw apparaat. In het voorbeeld hierboven is dit sdc omdat die als enige 8gb is (en de sd kaart is 8gb). Dat wil zeggen dat het apparaat zich op de locatie "/dev/sdc" bevind.
+Zodra u de regel van het sd kaartje heeft gevonden kijkt u bij de kolom "NAME". De naam zonder nummer is uw apparaat. In het voorbeeld hierboven is dit sdc omdat die als enige 8gb is (en de sd kaart is 8gb). Dat wil zeggen dat het apparaat zich op de locatie "/dev/sdc" bevindt.
 
 U kunt nu middels het volgende commando de img op de sd kaart zetten. Let er dan wel op dat alle gegevens die nu op de sd kaart staan gewist zullen worden.<br />`sudo dd if=/pad/naar/het/.img/bestand of=/dev/sdc` <br />
 Waar sdc de lettercombinatie is die u hierboven middels `lsblk` heeft gevonden.
