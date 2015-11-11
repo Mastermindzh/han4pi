@@ -46,7 +46,7 @@ Om Raspbian te installeren heeft u een image nodig van het Raspbian OS. Om de la
 Als u het .img bestand heeft uigepakt kunt u hieronder verdergaan met de installatieinstructies die bij uw systeem passen.
 
 <div id = "linux-raspbian-install"></div>
-#####Vervolginstructie voor Linux
+###Vervolginstructie voor Linux
 Als eerste stap gaan we het pad naar het sd kaartje waar we Raspbian op installeren zoeken. Dit kunnen we doen door het volgende commando in de terminal in te geven:<br />`lsblk`<br />
 
 U krijgt dan een venster met een aantal gegevens (onderstaande afbeelding). De belangrijkste gegevens hier zijn de "NAME" en "SIZE". Meestal is de "SIZE" kolom genoeg om uw sd kaartje te vinden. Dit omdat andere block apparaten (zoals een hdd) vaak veel groter zijn. Kunt u echter niet door alleen de kolom "SIZE" te gebruiken achterhalen welke regel uw sd kaartje betreft dan kunt u simpelweg de sd kaart eruit halen en dan het commando intypen. Vervolgens stopt u de sd kaart terug en voert u het commando nog eens uit. De verandering in het tweede resultaat is dan uw sd kaartje. Op de afbeelding hieronder is te zien dat mijn sd kaart op plek "sdc" zit.
@@ -63,10 +63,10 @@ Als u de status wilt opvragen van de transactie opent u een tweede terminal en g
 
 
 <div id = "windows-raspbian-install"></div>
-#####Vervolginstructie voor Windows
+###Vervolginstructie voor Windows
 
 <div id = "mac-raspbian-install"></div>
-#####Vervolginstructie voor Mac OS
+###Vervolginstructie voor Mac OS
 Als eerste stap gaan we het pad naar het sd kaartje waar we Raspbian op installeren zoeken. Dit kunnen we doen door het volgende commando in de terminal in te geven:<br />`diskutil list`<br />
 
 U krijgt dan een venster met een aantal gegevens (onderstaande afbeelding). De belangrijkste gegevens hier zijn de "IDENTIFIER" en "SIZE". Meestal is de "SIZE" kolom genoeg om uw sd kaartje te vinden. Dit omdat andere block apparaten (zoals een hdd) vaak veel groter zijn. Kunt u echter niet door alleen de kolom "SIZE" te gebruiken achterhalen welke regel uw sd kaartje betreft dan kunt u simpelweg de sd kaart eruit halen en dan het commando intypen. Vervolgens stopt u de sd kaart terug en voert u het commando nog eens uit. De verandering in het tweede resultaat is dan uw sd kaartje. Op de afbeelding hieronder is te zien dat mijn sd kaart op plek "sdc" zit.
