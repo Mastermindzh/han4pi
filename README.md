@@ -30,9 +30,10 @@ Voordat u het han4pi pakket kunt installeren zult u een sd kaartje moeten voorbe
 
 4. Geef vervolgens het volgende commando in: <br />`git clone https://github.com/Mastermindzh/han4pi.git`<br />
 
-5. Open vervolgens het bestand "install.sh" met een teksteditor. Dit kan in de terminal bijv. met het commando: <br />`nano han4pi/install.sh`<br /> Na het wijzigen van de variabelen drukt u op ctrl + x en vervolgens op y gevolgd door enter om het bestand op te slaan.
+5. Open vervolgens het bestand "install.sh" met een teksteditor. Dit kan in de terminal bijv. met het commando: <br />`nano han4pi/install.sh`<br /> 
 
-6. Pas de variabelen onder het kopje **#Gebruikers variabelen** aan zoals u wilt.
+6. Pas de variabelen onder het kopje **#Gebruikers variabelen** aan zoals u wilt. Na het wijzigen van de variabelen drukt u op ctrl + x en vervolgens op y gevolgd door enter om het bestand op te slaan.
+
 7. Daarna kunt u de installatie starten door het volgende commando te geven:<br />`bash han4pi/install.sh`
 
 8. Volg de instructies op het scherm.
