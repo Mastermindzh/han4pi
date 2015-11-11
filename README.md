@@ -4,8 +4,10 @@ Han4pi is een groep enthusiaste studenten die samen met 1 leraar (Johan Korten) 
 
 Gebruik een van de volgende links om door dit document te bladeren:
 
-[De installatie van het han4pi pakket](#user-content-install)
-
+- [De installatie van het han4pi pakket](#user-content-install)
+- [Raspbian installeren](#user-content-raspbian-install)
+-- [Raspbian installatie op Linux](#user-content-linux-raspbian-install)
+-- [Raspbian installatie op Windows](#user-content-windows-raspbian-install)
 
 
 **Organisatie:**
@@ -34,4 +36,16 @@ Voordat u het han4pi pakket kunt installeren zult u een sd kaartje moeten voorbe
 
 8. Volg de instructies op het scherm.
 9. Herstart de raspberry pi met het `reboot` commando.
+
+<div id = "raspbian-install"></div>
+##Raspbian installeren
+
+Om Raspbian te installeren heeft u een image nodig van het Raspbian OS. Om de laatste versie te downloaden klikt u [hier.](http://downloads.raspberrypi.org/raspbian_latest)
+
+
+<div id = "linux-raspbian-install"></div>
+#####Met een Linux host
+
+<div id = "windows-raspbian-install"></div>
+#####Met een Windows host
 
