@@ -6,8 +6,8 @@ Gebruik een van de volgende links om door dit document te bladeren:
 
 - [De installatie van het han4pi pakket](#user-content-install)
 - [Raspbian installeren](#user-content-raspbian-install)
--- [Raspbian installatie op Linux](#user-content-linux-raspbian-install)
--- [Raspbian installatie op Windows](#user-content-windows-raspbian-install)
+	- [Raspbian installatie op Linux](#user-content-linux-raspbian-install)
+	- [Raspbian installatie op Windows](#user-content-windows-raspbian-install)
 
 
 **Organisatie:**
