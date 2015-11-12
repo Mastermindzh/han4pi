@@ -140,11 +140,22 @@ setxkbmap us
 mkdir /home/"$USERNAME"/.config/autostart
 cp /home/"$USERNAME"/han4pi/bash/resources/start-terminal.desktop /home/"$USERNAME"/.config/autostart/
 
+#enable SPI
+echo "dtparam=spi=on" >> /boot/config.txt
+
 #update en upgrade het systeem en installeer vervolgens de benodigde packages.
 apt-get -y update && apt-get -y upgrade
 
 #installeer evt. benodigde software.
-apt-get -y install
+apt-get -y install python2.7-dev
+
+#installeer spidev
+wget https://github.com/Gadgetoid/py-spidev/archive/master.zip
+unzip master.zip
+rm master.zip
+cd py-spidev-master
+sudo python setup.py install
+cd ..
 
 
 
