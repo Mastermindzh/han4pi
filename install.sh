@@ -123,7 +123,7 @@ fi
 	rm "/home/"$USERNAME"/han4pi/install.sh"
 
 #Stel de han4pi wallpaper in
-cp /home/"$USERNAME"/han4pi/images/wallpaper.jpg /usr/share/raspberrypi-artwork/han4pi.jpg
+cp /home/"$USERNAME"/han4pi/bash/resources/wallpapers/wallpaper.jpg /usr/share/raspberrypi-artwork/han4pi.jpg
 cp /home/"$USERNAME"/han4pi/bash/resources/desktop-items-0.conf /home/"$USERNAME"/.config/pcmanfm/LXDE-pi/desktop-items-0.conf 
 
 #Kopieer de greeter naar een verborgen map
