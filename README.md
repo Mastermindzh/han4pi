@@ -44,7 +44,7 @@ Voordat u het han4pi pakket kunt installeren zult u een sd kaartje moeten voorbe
 
 Om Raspbian te installeren heeft u een image nodig van het Raspbian OS. Om de laatste versie te downloaden klikt u [hier.](http://downloads.raspberrypi.org/raspbian_latest) Pak de zip uit door er met de rechtermuisknop op te drukken en te kiezen voor "uitpakken" of een dergelijke optie.
 
-Als u het .img bestand heeft uigepakt kunt u hieronder verdergaan met de installatieinstructies die bij uw systeem passen.
+Als u het .zip bestand heeft uitgepakt kunt u hieronder verdergaan met de installatieinstructies die bij uw systeem passen.
 
 <div id = "linux-raspbian-install"></div>
 ###Vervolginstructie voor Linux
@@ -65,6 +65,12 @@ Als u de status wilt opvragen van de transactie opent u een tweede terminal en g
 
 <div id = "windows-raspbian-install"></div>
 ###Vervolginstructie voor Windows
+
+Als eerste stap moet het programma Win 32 Diskimager gedownload worden. klik [hier](http://sourceforge.net/projects/win32diskimager/files/latest/download) om dat te doen.
+Nadat de installatie van het programma voltooid is kunt u het programma opstarten. Om het programma op te starten navigeert u naar "C:\Program Files (x86)\ImageWriter" (standaard installatie locatie) en dubbel klikt u op Win32DiskImager.exe.
+
+Zodra het programma is gestart klikt u op het blauwe mapje en navigeert u naar het eerder gedownloade img bestand. Selecteer nu bij devices het sd kaartje waar Raspbian op geinstalleerd moet worden.
+Klik vervolgens op "write" om raspbian om de sd kaart te installeren.
 
 <div id = "mac-raspbian-install"></div>
 ###Vervolginstructie voor Mac OS
