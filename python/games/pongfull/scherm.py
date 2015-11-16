@@ -10,10 +10,10 @@ class Scherm():
 			schermobject.achtergrond=schermobject.maakAchtergrondAan()
 			schermobject.speler1 = spelerklasse.Speler(schermobject, "links") # linker speler aanmaken
 			schermobject.speler2 = spelerklasse.Speler(schermobject, "rechts") # rechter speler aanmaken
-			schermobject.bal = balklasse.Bal((0,0),(0.47,13),schermobject.speler1,schermobject.speler2, schermobject) # maak de bal aan. Eerste arhument is de positie, tweede de beweging (hoek en snelheid) en de 2 spelers worden meegegeven
+			schermobject.bal = balklasse.Bal((0,0),(0.47,3),schermobject.speler1,schermobject.speler2, schermobject) # maak de bal aan. Eerste arhument is de positie, tweede de beweging (hoek en snelheid) en de 2 spelers worden meegegeven
 			schermobject.spelersprite = pygame.sprite.RenderPlain((schermobject.speler1, schermobject.speler2)) # de sprite van de speler voor het tekenen op het scherm
 			schermobject.balsprite = pygame.sprite.RenderPlain(schermobject.bal)# de sprite van de bal voor het tekenen op het scherm
-		test=0
+		
 
 		def laad_afbeelding(schermobject, bestandsnaam): #deze methode probeert een afbeelding in te laden.
 				bestandspad = os.path.join('afbeeldingen', bestandsnaam) # alle afbeeldingen worden uitgelezen uit een map genaamd "afbeeldingen"

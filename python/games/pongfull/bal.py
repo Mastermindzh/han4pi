@@ -11,10 +11,10 @@ class Bal(pygame.sprite.Sprite): # de bal klasse
                 bal.speler1=speler1 # voeg een variabele speler 1 in (voor toekenning van de punten)
                 bal.speler2=speler2 # voeg een variabele speler 2 in (voor toekenning van de punten)
                 bal.scherm=schermklasse
-		bal.geraakt = 0 #of de bal geraakt is of niet
+		bal.geraakt = True #of de bal geraakt is of niet
 
         def update(bal):
-                nieuwePositie = bal.berekenNieuwePositie(bal.rect,bal.beweging) #beweeg de bal naar aanleiding van de beweging
+                nieuwePositie = bal.berekenNieuwePositie() #beweeg de bal naar aanleiding van de beweging
                 bal.rect = nieuwePositie #stel de nieuwe positie van de bal in
 		(hoek,z) = bal.beweging #maak de hoek en de z variabele van de bal gelijk aan de beweging 
 		
@@ -26,37 +26,40 @@ class Bal(pygame.sprite.Sprite): # de bal klasse
 			if (tr and tl) or (br and bl): #wanneer de bal in de hoek over 2 grenzen heen gaat ketst deze recht af
 				hoek = -hoek
 			if tl and bl: #wanneer de bal aan de linkerkant uit het scherm gaat
-				hoek = math.pi - hoek # eenvoudige hoekberekening voor het afketsen van de bal
-				bal.speler2.punten += 1 # speler 2 krijgt een punt!!!
-				bal.rect = bal.resetBalPositie(bal.rect,bal.beweging) #beweeg de bal naar aanleiding van de beweging
+				#bal.speler2.punten += 1 # speler 2 krijgt een punt!!!
+				bal.rect, bal.speler2.punten, hoek, z = bal.scoorBal(bal.speler2.punten, hoek) #beweeg de bal naar aanleiding van de beweging
 				
 			if tr and br: #wanneer de bal aan de rechterkant uit het scherm gaat
-				hoek = math.pi - hoek # eenvoudige hoekberekening voor het afketsen van de bal
-				bal.speler1.punten += 1# speler 1 krijgt een punt!!!
-				bal.rect = bal.resetBalPositie(bal.rect,bal.beweging) #beweeg de bal naar aanleiding van de beweging
+				#hoek = math.pi - hoek # eenvoudige hoekberekening voor het afketsen van de bal
+				#bal.speler1.punten += 1# speler 1 krijgt een punt!!!
+				bal.rect, bal.speler1.punten, hoek, z = bal.scoorBal(bal.speler1.punten, hoek) #beweeg de bal naar aanleiding van de beweging
 	    
 		else:
 			bal.speler1.rect.inflate(-3, -3)
 			bal.speler2.rect.inflate(-3, -3)
 			if bal.rect.colliderect(bal.speler1.rect) == 1 and not bal.geraakt: #speler 1 raakt met zijn padje de bal
 				hoek = math.pi - hoek # eenvoudige hoekberekening voor het afketsen van de bal
-				bal.geraakt = not bal.geraakt # verander de boolean geraakt van een 0 in een 1
-			elif bal.rect.colliderect(bal.speler2.rect) == 1 and not bal.geraakt:#speler 2 raakt met zijn padje de bal
+				bal.geraakt = not bal.geraakt # verander de boolean geraakt van een 0 in een 1	
+				z+=1
+			elif bal.rect.colliderect(bal.speler2.rect) == 1 and bal.geraakt:#speler 2 raakt met zijn padje de bal
 				hoek = math.pi - hoek# eenvoudige hoekberekening voor het afketsen van de bal
 				bal.geraakt = not bal.geraakt  # verander de boolean geraakt van een 0 in een 1
-			elif bal.geraakt:
-				bal.geraakt = not bal.geraakt  # verander de boolean geraakt van een 1 in een 0
+				z+=1
+			#elif bal.geraakt:
+				#bal.geraakt = not bal.geraakt  # verander de boolean geraakt van een 1 in een 0
 		bal.beweging = (hoek,z) # stel de beweging van de bal in
 
-        def berekenNieuwePositie(bal,rect,beweging): # berekening voor de nieuwe positie van de bal als er niets wordt geraakt
-                (hoek,z) = beweging # hoek en z variabelen instellen op basis van de beweging variabele
+        def berekenNieuwePositie(bal): # berekening voor de nieuwe positie van de bal als er niets wordt geraakt
+                (hoek,z) = bal.beweging # hoek en z variabelen instellen op basis van de beweging variabele
                 (dx,dy) = (z*math.cos(hoek),z*math.sin(hoek)) # de x en y waarmee de bal zal gaan bewegen worden bepaald op basis van sin en cos
-                return rect.move(dx,dy)
+                return bal.rect.move(dx,dy)
                 
-        def resetBalPositie(bal,rect,beweging): # berekening voor de nieuwe positie van de bal als er niets wordt geraakt
-                (dx,dy) = (-bal.rect[0]+(bal.scherm.scherm.get_width()/2),-bal.rect[0]+(bal.scherm.scherm.get_width()/2)) # de x en y waarmee de bal zal gaan bewegen worden bepaald op basis van sin en cos
-                time.sleep(2)
-                return rect.move(dx,dy)
+        def scoorBal(bal, punten, hoek): # berekening voor de nieuwe positie van de bal als er niets wordt geraakt
+                punten += 1
+                (dx,dy) = (-bal.rect[0]+(bal.scherm.scherm.get_width()/2),-bal.rect[1]+(bal.scherm.scherm.get_height()/2)) # de x en y waarmee de bal zal gaan bewegen worden bepaald op basis van sin en cos
+                hoek = math.pi - hoek # eenvoudige hoekberekening voor het afketsen van de bal
+                bal.geraakt = not bal.geraakt
+                return bal.rect.move(dx,dy), punten, hoek, 3
 
 if __name__ == '__main__':
 	sys.stderr.write("Doe me niks aan! Ik ben maar een simpele bal... Als ik jou was zou ik pong.py draaien.")

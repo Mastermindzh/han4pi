@@ -69,9 +69,6 @@ def hoofdmenu(scherm, menu, lettertype = None,
 					else:
 						cursorpos = len(menu) - 1; ArrowPressed = True
 
-
-				# This Section is huge and ugly, I know... But I don't
-				# know a better method for this^^
 				if event.key == pygame.K_1:
 					cursorpos = 0; ArrowPressed = True; exitMenu = True
 				elif event.key == pygame.K_2 and len(menu) >= 2:

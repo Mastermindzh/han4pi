@@ -1,8 +1,8 @@
 try: #probeer de benodigde klassen te importeren
         import sys
         import random
-        import math
-        import os
+        #import math
+        #import os
         import bal as balklasse
         import scherm as schermklasse
         import speler as spelerklasse
