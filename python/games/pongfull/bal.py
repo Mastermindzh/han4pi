@@ -2,7 +2,7 @@ import pygame, sys, math, time, random
 
 class Bal(pygame.sprite.Sprite): # de bal klasse
 
-        def __init__(bal, (xy), beweging, speler1, speler2, schermklasse): #de bal krijgt een object, een positie, en een beweging (de verandering in x en y iedere frame) mee
+        def __init__(bal, beweging, speler1, speler2, schermklasse): #de bal krijgt een object, een positie, en een beweging (de verandering in x en y iedere frame) mee
                 pygame.sprite.Sprite.__init__(bal) #initialiseer de sprite
                 bal.image, bal.rect = schermklasse.laad_afbeelding('bal.png') # gebruik de methode laad_afbeelding om de afbeelding in te laden en de grootte hiervan
                 scherm = pygame.display.get_surface() # een variabele binnen de bal voor het scherm zodat deze op de volgende regel gebruikt kan worden
@@ -45,8 +45,6 @@ class Bal(pygame.sprite.Sprite): # de bal klasse
 				hoek = math.pi - hoek# eenvoudige hoekberekening voor het afketsen van de bal
 				bal.geraakt = not bal.geraakt  # verander de boolean geraakt van een 0 in een 1
 				z+=1
-			#elif bal.geraakt:
-				#bal.geraakt = not bal.geraakt  # verander de boolean geraakt van een 1 in een 0
 		bal.beweging = (hoek,z) # stel de beweging van de bal in
 
         def berekenNieuwePositie(bal): # berekening voor de nieuwe positie van de bal als er niets wordt geraakt

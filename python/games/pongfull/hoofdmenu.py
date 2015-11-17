@@ -1,161 +1,80 @@
 import pygame, sys
 
 
-def hoofdmenu(scherm, menu, lettertype = None,
+def hoofdmenu(scherm, menu, 
             lettertypeGrootte = 70, afstand = 1.4, fgcolor = (255,255,255),
-            cursorkleur = (255,0,0), exitAllowed = True):
+            cursorkleur = (255,0,0)):
 
-	x_pos=(scherm.get_width()/2)-(scherm.get_width()/3.2)
-	y_pos=(scherm.get_height()/2)-(len(menu)*32)
-	# Draw the Menupoints
-	if lettertype == None:
-		mylettertype = pygame.font.Font(None, lettertypeGrootte)
-	else:
-		mylettertype = pygame.font.SysFont(lettertype, lettertypeGrootte)
-	cursorpos = 0
-	renderWithChars = False
-	for i in menu:
-		if renderWithChars == False:
-			text =  mylettertype.render(str(cursorpos + 1)+".  " + i,
-				True, fgcolor)
-		else:
-			text =  mylettertype.render(chr(char)+".  " + i,
-				True, fgcolor)
-			char += 1
-		tekstvierkant = text.get_rect()
+	x_pos=(scherm.scherm.get_width()/2)-(scherm.scherm.get_width()/3.2)#xpositie menu
+	y_pos=(scherm.scherm.get_height()/2)-(len(menu)*32)#ypositie menu
+	lettertype = pygame.font.Font(None, lettertypeGrootte) #Stel het lettertype en de grootte van het lettertype in
+	cursorPositie = 0 # De cursor begint op positie 0
+	for i in menu: #Voor ieder menuitem worden de volgende regels code aangeroepen
+		tekst =  lettertype.render(str(cursorPositie + 1)+".  " + i,
+			True, fgcolor) # De tekst van het menuitem wordt samengesteld (er wordt een nummertje aan toegevoegd)
+		tekstvierkant = tekst.get_rect() 
 		tekstvierkant = tekstvierkant.move(x_pos, 
-		           (lettertypeGrootte // afstand * cursorpos) + y_pos)
-		scherm.blit(text, tekstvierkant)
-		pygame.display.update(tekstvierkant)
-		cursorpos += 1
-		if cursorpos == 9:
-			renderWithChars = True
-			char = 65
+		           (lettertypeGrootte // afstand * cursorPositie) + y_pos) #Het menuitem wordt op de goede plaats neergezet
+		scherm.scherm.blit(tekst, tekstvierkant) #De tekst wordt getekend op het scherm
+		pygame.display.update(tekstvierkant) #De display wordt geupdate waardoor de zojuist getekende tekst ook daadwerkelijk zichtbaar wordt op het scherm
+		cursorPositie += 1 #De cursorpositie wordt opgehoogd
 
-	# Draw the ">", the Cursor
-	cursorpos = 0
-	cursor = mylettertype.render(">", True, cursorkleur)
-	cursorrect = cursor.get_rect()
-	cursorrect = cursorrect.move(x_pos - (lettertypeGrootte // afstand),
-	             (lettertypeGrootte // afstand * cursorpos) + y_pos)
+	cursorPositie = 0 #Na het samenstellen van het menu wordt de cursor weer op 0 gezet. Nu kan deze zelfde variabele gebruikt worden voor de daadwerkelijke positie van de cursor.
+	cursor = lettertype.render(">", True, cursorkleur) # Het pijltje die de cursor moet voorstellen
+	cursorvierkant = cursor.get_rect()
+	cursorvierkant = cursorvierkant.move(x_pos - (lettertypeGrootte // afstand),
+	             (lettertypeGrootte // afstand * cursorPositie) + y_pos) #Zet dit pijltje op de juiste plek
 
-	# The whole While-loop takes care to show the Cursor, move the
-	# Cursor and getting the Keys (1-9 and A-Z) to work...
-	ArrowPressed = True
-	exitMenu = False
-	klok = pygame.time.Clock()
-	filler = pygame.Surface.copy(scherm)
-	fillerrect = filler.get_rect()
+	pijltjeIngedrukt = True #De variabele pijltjeIngedrukt, die bepaald of er een knop is ingedrukt en er daadwerkelijk opnieuw op het scherm moet worden getekend, begint op True. Hierdoor wordt dadelijk in de loop het pijltje bij het geselecteerde menuitem op het scherm getekend.
+	menuAfsluiten = False #Een variabele die op true staat als het tijd is om de loop uit te gaan en het menu te verlaten.
+	klok = pygame.time.Clock() #Maak de klok aan
+	opvuller = pygame.Surface.copy(scherm.scherm) #maak een vakje aan die steeds over de vorige positie van het pijltje (>) wordt getekend 
+	opvullervierkant = opvuller.get_rect() 
 	while True:
 		klok.tick(30)
-		if ArrowPressed == True:
-			scherm.blit(filler, fillerrect)
-			pygame.display.update(cursorrect)
-			cursorrect = cursor.get_rect()
-			cursorrect = cursorrect.move(x_pos - (lettertypeGrootte // afstand),
-			             (lettertypeGrootte // afstand * cursorpos) + y_pos)
-			scherm.blit(cursor, cursorrect)
-			pygame.display.update(cursorrect)
-			ArrowPressed = False
-		if exitMenu == True:
+		if pijltjeIngedrukt == True: #Nadat er op pijltje omhoog of pijltje omlaag is gedrukt moet de opvuller over de oude positie van het pijltje worden getekend. Ook wordt hier het nieuwe pijltje getekend.
+			scherm.scherm.blit(opvuller, opvullervierkant) # Teken de opvuller
+			pygame.display.update(cursorvierkant) # Geef de opvuller op het scherm weer
+			cursorvierkant = cursor.get_rect()
+			cursorvierkant = cursorvierkant.move(x_pos - (lettertypeGrootte // afstand),
+			             (lettertypeGrootte // afstand * cursorPositie) + y_pos) #Beweeg het cursorvierkant naar aanleiding van de laatste druk op een pijltje van het toetsenbord
+			scherm.scherm.blit(cursor, cursorvierkant) # Teken het pijltje (>)
+			pygame.display.update(cursorvierkant) # Geef het pijltje (>) op het scherm weer
+			pijltjeIngedrukt = False #Het pijltje is nu niet meer ingedrukt
+		if menuAfsluiten == True: #Als het menu wordt afgesloten slopen we de loop.
 			break
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
-				return -1
-			if event.type == pygame.KEYDOWN:
-				if event.key == pygame.K_ESCAPE and exitAllowed == True:
-					if cursorpos == len(menu) - 1:
-						exitMenu = True
-					else:
-						cursorpos = len(menu) - 1; ArrowPressed = True
+		for event in pygame.event.get(): #Ga alle events af
+			if event.type == pygame.QUIT: #Als de speler op kruisje drukt
+				return 2
+			if event.type == pygame.KEYDOWN: # Als de speler op een toets van het toetsenbord drukt
+				if event.key == pygame.K_ESCAPE: # In het geval van escape
+					if cursorPositie == len(menu) - 1: # Als de cursor al op de laatste optie in het menu staat sluit het spel zich af. 
+						menuAfsluiten = True
+					else: # Anders dan zal het pijltje naar de laatste optie in het menu (beeindigen) springen. 
+						cursorPositie = len(menu) - 1; pijltjeIngedrukt = True 
 
-				if event.key == pygame.K_1:
-					cursorpos = 0; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_2 and len(menu) >= 2:
-					cursorpos = 1; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_3 and len(menu) >= 3:
-					cursorpos = 2; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_4 and len(menu) >= 4:
-					cursorpos = 3; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_5 and len(menu) >= 5:
-					cursorpos = 4; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_6 and len(menu) >= 6:
-					cursorpos = 5; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_7 and len(menu) >= 7:
-					cursorpos = 6; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_8 and len(menu) >= 8:
-					cursorpos = 7; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_9 and len(menu) >= 9:
-					cursorpos = 8; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_a and len(menu) >= 10:
-					cursorpos = 9; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_b and len(menu) >= 11:
-					cursorpos = 10; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_c and len(menu) >= 12:
-					cursorpos = 11; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_d and len(menu) >= 13:
-					cursorpos = 12; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_e and len(menu) >= 14:
-					cursorpos = 13; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_f and len(menu) >= 15:
-					cursorpos = 14; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_g and len(menu) >= 16:
-					cursorpos = 15; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_h and len(menu) >= 17:
-					cursorpos = 16; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_i and len(menu) >= 18:
-					cursorpos = 17; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_j and len(menu) >= 19:
-					cursorpos = 18; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_k and len(menu) >= 20:
-					cursorpos = 19; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_l and len(menu) >= 21:
-					cursorpos = 20; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_m and len(menu) >= 22:
-					cursorpos = 21; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_n and len(menu) >= 23:
-					cursorpos = 22; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_o and len(menu) >= 24:
-					cursorpos = 23; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_p and len(menu) >= 25:
-					cursorpos = 24; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_q and len(menu) >= 26:
-					cursorpos = 25; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_r and len(menu) >= 27:
-					cursorpos = 26; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_s and len(menu) >= 28:
-					cursorpos = 27; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_t and len(menu) >= 29:
-					cursorpos = 28; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_u and len(menu) >= 30:
-					cursorpos = 29; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_v and len(menu) >= 31:
-					cursorpos = 30; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_w and len(menu) >= 32:
-					cursorpos = 31; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_x and len(menu) >= 33:
-					cursorpos = 32; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_y and len(menu) >= 34:
-					cursorpos = 33; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_z and len(menu) >= 35:
-					cursorpos = 34; ArrowPressed = True; exitMenu = True
-				elif event.key == pygame.K_UP:
-					ArrowPressed = True
-					if cursorpos == 0:
-						cursorpos = len(menu) - 1
-					else:
-						cursorpos -= 1
+				if event.key == pygame.K_1: #Als er op de '1' toets wordt gedrukt wordt het eerste menuitem uitgevoerd.
+					cursorPositie = 0; pijltjeIngedrukt = True; menuAfsluiten = True
+				elif event.key == pygame.K_2 and len(menu) >= 2:#Als er op de '2' toets wordt gedrukt wordt het eerste menuitem uitgevoerd.
+					cursorPositie = 1; pijltjeIngedrukt = True; menuAfsluiten = True
+				elif event.key == pygame.K_3 and len(menu) >= 3:#Als er op de '3' toets wordt gedrukt wordt het eerste menuitem uitgevoerd.
+					cursorPositie = 2; pijltjeIngedrukt = True; menuAfsluiten = True
+				elif event.key == pygame.K_UP: #Als er op pijltje omhoog wordt gedrukt
+					pijltjeIngedrukt = True
+					if cursorPositie == 0: #Als de cursorpositie op 0 staat wordt deze opgehoogd naar de lengte van het menu
+						cursorPositie = len(menu) - 1
+					else: #anders wordt de cursorpositie met 1 verlaagd
+						cursorPositie -= 1
 				elif event.key == pygame.K_DOWN:
-					ArrowPressed = True
-					if cursorpos == len(menu) - 1:
-						cursorpos = 0
-					else:
-						cursorpos += 1
-				elif event.key == pygame.K_KP_ENTER or \
-				     event.key == pygame.K_RETURN:
-							exitMenu = True
+					pijltjeIngedrukt = True
+					if cursorPositie == len(menu) - 1: #Als de cursorpositie op de lengte van het menu (-1 natuurlijk) staat wordt deze verlaagd naar 0
+						cursorPositie = 0
+					else: #anders wordt de cursorpositie met 1 opgehoogd
+						cursorPositie += 1
+				elif event.key == pygame.K_KP_ENTER or event.key == pygame.K_RETURN:#Als er op enter wordt gedrukt mag het menu af worden gesloten
+							menuAfsluiten = True
 	
-	return cursorpos
+	return cursorPositie
 
 if __name__ == '__main__':
 	sys.stderr.write("Je moet mij importeren, niet draaien.")
