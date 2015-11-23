@@ -27,12 +27,12 @@ class Bal(pygame.sprite.Sprite): # de bal klasse
 				hoek = -hoek
 			if tl and bl: #wanneer de bal aan de linkerkant uit het scherm gaat
 				#bal.speler2.punten += 1 # speler 2 krijgt een punt!!!
-				bal.rect, bal.speler2.punten, hoek, z = bal.scoorBal(bal.speler2.punten, hoek) #beweeg de bal naar aanleiding van de beweging
+				bal.rect, bal.speler2.punten, hoek, z = bal.scoorBal(bal.speler2.punten, hoek, 2) #beweeg de bal naar aanleiding van de beweging
 				
 			if tr and br: #wanneer de bal aan de rechterkant uit het scherm gaat
 				#hoek = math.pi - hoek # eenvoudige hoekberekening voor het afketsen van de bal
 				#bal.speler1.punten += 1# speler 1 krijgt een punt!!!
-				bal.rect, bal.speler1.punten, hoek, z = bal.scoorBal(bal.speler1.punten, hoek) #beweeg de bal naar aanleiding van de beweging
+				bal.rect, bal.speler1.punten, hoek, z = bal.scoorBal(bal.speler1.punten, hoek, 1) #beweeg de bal naar aanleiding van de beweging
 	    
 		else:
 			bal.speler1.rect.inflate(-3, -3)
@@ -52,8 +52,10 @@ class Bal(pygame.sprite.Sprite): # de bal klasse
                 (dx,dy) = (z*math.cos(hoek),z*math.sin(hoek)) # de x en y waarmee de bal zal gaan bewegen worden bepaald op basis van sin en cos
                 return bal.rect.move(dx,dy)
                 
-        def scoorBal(bal, punten, hoek): # berekening voor de nieuwe positie van de bal als er niets wordt geraakt
+        def scoorBal(bal, punten, hoek, spelernummer): # berekening voor de nieuwe positie van de bal als er niets wordt geraakt
                 punten += 1
+                if(punten==bal.scherm.spelLengte):
+					bal.scherm.winnaar=spelernummer
                 (dx,dy) = (-bal.rect[0]+(bal.scherm.scherm.get_width()/2),-bal.rect[1]+(bal.scherm.scherm.get_height()/2)) # de x en y waarmee de bal zal gaan bewegen worden bepaald op basis van sin en cos
                 hoek = math.pi - hoek # eenvoudige hoekberekening voor het afketsen van de bal
                 bal.geraakt = not bal.geraakt
