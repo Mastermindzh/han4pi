@@ -3,10 +3,10 @@ import speler as spelerklasse
 import bal as balklasse
 
 class Scherm():
-		def __init__(schermobject): 
+		def __init__(schermobject, spelLengte, lettertypeGrootte): 
 			schermobject.scherm = pygame.display.set_mode((640, 640)) #schermgrootte. Het programma is zo gemaakt dat deze zich automatisch aanpast bij verandering van de schermgrootte.
 			pygame.font.init() # initialisatie van pygame font
-			schermobject.lettertype = pygame.font.Font(None, 20) # lettertype instellen
+			schermobject.lettertype = pygame.font.Font(None, lettertypeGrootte) # lettertype instellen
 			schermobject.achtergrond=schermobject.maakAchtergrondAan()
 			schermobject.speler1 = spelerklasse.Speler(schermobject, "links") # linker speler aanmaken
 			schermobject.speler2 = spelerklasse.Speler(schermobject, "rechts") # rechter speler aanmaken
@@ -17,6 +17,8 @@ class Scherm():
 			schermobject.spelersprite = pygame.sprite.RenderPlain((schermobject.speler1, schermobject.speler2)) # de sprite van de speler voor het tekenen op het scherm
 			schermobject.balsprite = pygame.sprite.RenderPlain(schermobject.bal)# de sprite van de bal voor het tekenen op het scherm
 			schermobject.balsprite2 = pygame.sprite.RenderPlain(schermobject.bal2)# de sprite van de bal voor het tekenen op het scherm
+			schermobject.winnaar=0
+			schermobject.spelLengte=spelLengte
 		
 
 		def laad_afbeelding(schermobject, bestandsnaam): #deze methode probeert een afbeelding in te laden.

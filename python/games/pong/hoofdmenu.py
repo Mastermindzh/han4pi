@@ -55,10 +55,12 @@ def hoofdmenu(scherm, menu,
 
 				if event.key == pygame.K_1: #Als er op de '1' toets wordt gedrukt wordt het eerste menuitem uitgevoerd.
 					cursorPositie = 0; pijltjeIngedrukt = True; menuAfsluiten = True
-				elif event.key == pygame.K_2 and len(menu) >= 2:#Als er op de '2' toets wordt gedrukt wordt het eerste menuitem uitgevoerd.
+				elif event.key == pygame.K_2 and len(menu) >= 2:#Als er op de '2' toets wordt gedrukt wordt het tweede menuitem uitgevoerd.
 					cursorPositie = 1; pijltjeIngedrukt = True; menuAfsluiten = True
-				elif event.key == pygame.K_3 and len(menu) >= 3:#Als er op de '3' toets wordt gedrukt wordt het eerste menuitem uitgevoerd.
+				elif event.key == pygame.K_3 and len(menu) >= 3:#Als er op de '3' toets wordt gedrukt wordt het derde menuitem uitgevoerd.
 					cursorPositie = 2; pijltjeIngedrukt = True; menuAfsluiten = True
+				elif event.key == pygame.K_4 and len(menu) >= 4:#Als er op de '4' toets wordt gedrukt wordt het vierde menuitem uitgevoerd.
+					cursorPositie = 3; pijltjeIngedrukt = True; menuAfsluiten = True
 				elif event.key == pygame.K_UP: #Als er op pijltje omhoog wordt gedrukt
 					pijltjeIngedrukt = True
 					if cursorPositie == 0: #Als de cursorpositie op 0 staat wordt deze opgehoogd naar de lengte van het menu
