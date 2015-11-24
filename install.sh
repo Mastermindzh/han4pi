@@ -164,16 +164,20 @@ echo "Zodra u op enter drukt krijgt u tweemaal een wachtwoord invoervak, geef da
 echo "Na het invoeren van het wachtwoord wordt er gevraagd of u een 'view-only' wachtwoord wilt instellen. Geef hier een N in."
 read null
 
+tightvnc :1
+
 # Voeg tightvnc toe aan de opstartitems
 cp /home/"$USERNAME"/han4pi/bash/resources/tightvnc.desktop /home/"$USERNAME"/.config/autostart/
 
 # Voeg de games toe aan het menu
-echo "cd /home/$(whoami)/\"han4pi/python/games/Catch the raspberry\"/ && python2 game.py" >> /opt/catch_the_raspberry.sh
+echo "cd /home/$USERNAME/\"han4pi/python/games/Catch the raspberry\"/ && python2 game.py" >> /opt/catch_the_raspberry.sh
 cp "/home/$USERNAME/han4pi/python/games/Catch the raspberry/Images/icon.png" /usr/share/pixmaps/catch_the_raspberry.png
 cp /home/"$USERNAME"/han4pi/bash/resources/catch_the_raspberry.desktop /usr/share/applications/Catch_the_raspberry.desktop
 
-echo "cd /home/$(whoami)/\"han4pi/python/games/Catch the raspberry (controller)\"/ && python2 game.py" >> /opt/catch_the_raspberry_controller.sh
+echo "cd /home/$USERNAME/\"han4pi/python/games/Catch the raspberry (controller)\"/ && python2 game.py" >> /opt/catch_the_raspberry_controller.sh
 cp /home/"$USERNAME"/han4pi/bash/resources/catch_the_raspberry_controller.desktop /usr/share/applications/Catch_the_raspberry.desktop
 
 
+#herstart
+reboot
 
