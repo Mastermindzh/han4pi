@@ -12,9 +12,29 @@
 
 
 # We hebben een aantal programma's nodig, die kunnen we hier importeren
-import sys, pygame
+import sys, pygame, spidev,time,os
 from pygame import *
 from random import randint
+
+# Open spi op poort...
+spi=spidev.SpiDev()
+spi.open(0,0)
+
+
+# Pin nummer van de POT 
+potpin = 0;
+last_read =0;
+tolerance = 5;
+
+# Methode om pot mee te lezen
+def readadc(adcnum):
+	if((adcnum > 7) or (adcnum < 0)):
+		return -1
+	r = spi.xfer2([1,(8+adcnum)<<4,0])
+	adcout = ((r[1]&3)<< 8) +r[2]
+	return adcout
+
+
 
 # Start pygame en maak een scherm
 init() 													# Start pygame
@@ -57,7 +77,7 @@ balrect.centerx	= randint(0+(bal.get_size()[0]/2),scherm_breedte)		# Zet de eers
 # Emmer instellingen
 emmer 				= image.load("Images/bucket.png") 	# Het plaatje van de emmer toewijzen
 emmerrect 			= emmer.get_rect()					# Sla het vierkant van de emmer op (makkelijk voor intersects)
-emmerrect.centery 	= 525								# Y positie van de emmer
+emmerrect.centery 	= height -100						# Y positie van de emmer
 
 # Overige instellingen
 score 	= 0			# De startscore
@@ -93,9 +113,17 @@ def wachtOpQuit():
 
 # Muisbeweging van de emmer
 def beweegEmmer():
-	if event.type == MOUSEMOTION:
-		p=mouse.get_pos()
-		emmerrect.centerx=p[0]
+	global last_read , emmerrect, emmer
+	trim_pot = readadc(potpin)
+
+	# Check of de emmer te ver naar links zit
+	if(trim_pot < emmer.get_size()[0]/2):
+		trim_pot = emmer.get_size()[0]/2 + 2
+	# Check of de emmer te ver naar rechts zit
+	if(trim_pot > width - emmer.get_size()[0]/2):
+		trim_pot = width - emmer.get_size()[0]/2
+	emmerrect.centerx=trim_pot
+
 
 #beweeg de bal
 def beweegBal():
@@ -169,8 +197,8 @@ while 1:
 	# Een for loop om het toetsenbord / muis op te vangen
 	for event in pygame.event.get():
 		wachtOpQuit() # controlleer of de gebruiker het spel wil afsluiten
-		beweegEmmer() # controlleer of de emmer moet bewegen
 	
+	beweegEmmer() 				# controlleer of de emmer moet bewegen	
 	beweegBal() 				# Beweeg de bal
 	checkBalVoorbijEmmer() 		# Controlleer of de bal voorbij de emmer is.
 	checkBalGevangen()			# Controlleer of de bal gevangen is
