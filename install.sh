@@ -176,8 +176,4 @@ echo "cd /home/$(whoami)/\"han4pi/python/games/Catch the raspberry (controller)\
 cp /home/"$USERNAME"/han4pi/bash/resources/catch_the_raspberry_controller.desktop /usr/share/applications/Catch_the_raspberry.desktop
 
 
-# Herstart
-reboot
-
-
 
