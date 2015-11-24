@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=tight vnc server 
+Type=Application
+Exec=vncserver :1
+Terminal=false
+Comment=A lightweight vnc server
+NoDisplay=false
+Name[en]=tightvnc
