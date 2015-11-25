@@ -9,6 +9,7 @@ class Speler(pygame.sprite.Sprite):
                 speler.grenzen = scherm.get_rect()#de grenzen van de speler zijn gelijk aan de grenzen van het scherm
                 speler.punten = 0 # de speler begint met nul punten
                 speler.kant = kant # de kant van de speler (speler 1 heeft kant links, speler 2 heeft kant rechts)
+                speler.snelheid = 10 # snelheid van de beweging van de speler
                 speler.stelPositiesIn() # stel de positie van de speler in
 
         def stelPositiesIn(speler):#stel de positie van de speler in
@@ -24,8 +25,11 @@ class Speler(pygame.sprite.Sprite):
                         speler.rect = nieuwePositie 
                 pygame.event.pump()
 
-        def beweeg(speler, snelheid): #bepaling van positie als de speler beweegt. Logischerwijs hoeft alleen de y positie aangepast te worden.
-                speler.bewegingsPosities[1] += snelheid
+        def beweegNaarBoven(speler): #bepaling van positie als de speler naar boven beweegt. Logischerwijs hoeft alleen de y positie aangepast te worden.
+                speler.bewegingsPosities[1] -= speler.snelheid
+
+        def beweegNaarBeneden(speler):#bepaling van positie als de speler naar beneden beweegt. Logischerwijs hoeft alleen de y positie aangepast te worden.
+                speler.bewegingsPosities[1] += speler.snelheid
 
 if __name__ == '__main__':
 	sys.stderr.write("Jij kan mij besturen, maar niet op deze manier. Als ik jou was zou ik pong.py draaien.")
