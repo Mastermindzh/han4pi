@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Catch the Raspberry 
+Type=Application
+Exec=bash /opt/catch_the_raspberry.sh
+Icon=/usr/share/pixmaps/catch_the_raspberry.png
+Categories=Game;
+Terminal=false
+Comment=Catch the Raspberry 
+NoDisplay=false
+Name[en]=Catch the Raspberry 
