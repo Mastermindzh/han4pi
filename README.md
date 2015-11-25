@@ -12,11 +12,14 @@ Gebruik een van de volgende links om door dit document te bladeren:
 
 
 **Organisatie:**
-- Simon Baars
-- Johan Korten
-- Rick van Lieshout
-- Ron nabuurs
-- Thomas Nobel
+
+Voor eventuele vragen zijn alle projectleden laagdrempelig te mailen. U krijgt dan zo spoedig mogelijk reactie op uw vraag. Hieronder volgt een lijst met alle projectleden:
+
+- Simon Baars -- simon.mailadres@gmail.com
+- Johan Korten -- Johan.Korten@han.nl
+- Rick van Lieshout -- Rick@mi-soft.nl
+- Ron nabuurs -- nabuurs.ron@gmail.com
+- Thomas Nobel -- thomas_nobel_2@hotmail.com
 
 <div id = "install"></div>
 ## De installatie van het han4pi pakket
