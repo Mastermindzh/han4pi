@@ -1,15 +1,15 @@
 #!/bin/bash
 
-#Gebruikers variabelen
-HOSTNAME='HAN'	# hostname die deze pi moet krijgen
+# Gebruikers variabelen
+HOSTNAME='HAN'	# Hostname die deze pi moet krijgen
 USERNAME='pi'	# Gebruikersnaam van de gebruiker waarvoor han4pi geinstalleerd moet worden.
 
-#Andere variabelen die noodzakelijk zijn voor het script
+# Andere variabelen die noodzakelijk zijn voor het script
 VERSION='0'
 SKIP=false
 ret=false
 
-#Bekijk of er parameters meegegeven zijn.
+# Bekijk of er parameters meegegeven zijn.
 while getopts 'hlvs' flag; do
   case "${flag}" in
     h) echo "$(pwd)/bash/resources/help" 
@@ -26,7 +26,7 @@ while getopts 'hlvs' flag; do
   esac
 done
 
-#controlleer of de opgegeven gebruikersnaam bij een gebruiker hoort.
+# Controlleer of de opgegeven gebruikersnaam bij een gebruiker hoort.
 getent passwd "$USERNAME" >/dev/null 2>&1 && ret=true
 
 if ! $ret; then
@@ -34,10 +34,10 @@ if ! $ret; then
     exit 0
 fi
 
-#controlleer of de opgegeven gebruiker een home map heeft, zo niet maak er een.
+# Controlleer of de opgegeven gebruiker een home map heeft, zo niet maak er een.
 mkdir -p /home/"$USERNAME"
 
-#Controlleer op root
+# Controlleer op root
 if [[ $EUID -ne 0 ]]; then
    echo "Dit script moet met root rechten worden uitgevoerd.
 Dit kunt u doen door het aan te roepen met sudo. (sudo bash scriptnaam.sh)
@@ -45,7 +45,7 @@ Dit kunt u doen door het aan te roepen met sudo. (sudo bash scriptnaam.sh)
    exit 1
 fi
 
-#controlleer of github.com werkt, zo niet dan kan het script niet verder gaan
+# Controlleer of github.com werkt, zo niet dan kan het script niet verder gaan
 curl http://www.github.com.com 2>/dev/null > /tmp/webtest.txt
 if [[ $? != 0 ]]; then
   echo 'Er kan geen verbinding met github gemaakt worden.'
@@ -56,7 +56,7 @@ fi
 # Even weer een schoon scherm tonen
 clear
 
-#Zet wat kleur variabelen
+# Zet wat kleur variabelen
 RED='\033[0;31m'
 BLUE='\033[0;34m'
 WHITE='\033[0;37m'
@@ -64,7 +64,7 @@ NC='\033[0m'
 
 if [ "$SKIP" = false ]; then
 
-	#Print het han logo
+	# Print het han logo
 	
 	echo -e ${BLUE}10011110000101000010100101000011011011010000001001011000010001111111110011111111
 	echo -e ${BLUE}01101001110101110001000010111101001101000011101000011101000001110111101100101110
@@ -88,24 +88,24 @@ if [ "$SKIP" = false ]; then
 	echo -e ${BLUE}01100000011000101010100111000101000100001011111101111010001111001110100001010011
 	echo -e ${BLUE}00011001011111011101001000100100001011100111100101110111010101001001101011100000
 	echo -e ${BLUE}01100001011010110110010010110100110100110010011011111100111000100000001101101111
-	#Reset de kleur terug naar de default
+	# Reset de kleur terug naar de default
 	echo -e ${NC}
 
-	#heet de gebruiker welkom
+	# Heet de gebruiker welkom
 	echo "Welkom bij het han4pi installatie programma."
 	echo "Druk op enter om de installatie te starten."
 	read null
 	
-	#verander de hostname indien gewenst.
+	# Verander de hostname indien gewenst.
 	echo $HOSTNAME > /etc/hostname
 	
-	#Verwijder oude han4pi map als die aanwezig is
+	# Verwijder oude han4pi map als die aanwezig is
 	rm -rf "/home/"$USERNAME"/han4pi"
 	
-	#download nieuwe han4pi files
+	# Download nieuwe han4pi files
 	git clone https://github.com/Mastermindzh/han4pi.git "/home/"$USERNAME"/han4pi"
 	
-fi #end of skip
+fi # End of skip
 
 # Controlleer of de scriptversies gelijk zijn.
 newver=$(bash "/home/"$USERNAME"/han4pi/install.sh"  -v)
@@ -119,37 +119,37 @@ then
 	bash "/home/"$USERNAME"/han4pi/install.sh" -s
 fi
 
-#verwijder het installatie script uit de gebruikersmap.
+# Verwijder het installatie script uit de gebruikersmap.
 	rm "/home/"$USERNAME"/han4pi/install.sh"
 
-#Stel de han4pi wallpaper in
+# Stel de han4pi wallpaper in
 cp /home/"$USERNAME"/han4pi/bash/resources/wallpapers/wallpaper.jpg /usr/share/raspberrypi-artwork/han4pi.jpg
 cp /home/"$USERNAME"/han4pi/bash/resources/desktop-items-0.conf /home/"$USERNAME"/.config/pcmanfm/LXDE-pi/desktop-items-0.conf 
 
-#Kopieer de greeter naar een verborgen map
+# Kopieer de greeter naar een verborgen map
 mkdir /home/"$USERNAME"/.han4pi
 cp /home/"$USERNAME"/han4pi/bash/greeter.sh /home/"$USERNAME"/.han4pi/greeter.sh
 
-#Zorg ervoor dat de greeter wordt uitgevoerd bij elke start van een terminal
+# Zorg ervoor dat de greeter wordt uitgevoerd bij elke start van een terminal
 echo "bash /home/"$USERNAME"/.han4pi/greeter.sh" >> "/home/"$USERNAME"/.bashrc"
 
-#zet de keyboard map op US, de standaard in Nederland.
+# Zet de keyboard map op US, de standaard in Nederland.
 setxkbmap us
 
-#maak de directory voor autostart apps en voeg daar lxterminal aan toe
+# Maak de directory voor autostart apps en voeg daar lxterminal aan toe
 mkdir /home/"$USERNAME"/.config/autostart
 cp /home/"$USERNAME"/han4pi/bash/resources/start-terminal.desktop /home/"$USERNAME"/.config/autostart/
 
-#enable SPI
+# Enable SPI
 echo "dtparam=spi=on" >> /boot/config.txt
 
-#update en upgrade het systeem en installeer vervolgens de benodigde packages.
+# Update en upgrade het systeem en installeer vervolgens de benodigde packages.
 apt-get -y update && apt-get -y upgrade
 
-#installeer evt. benodigde software.
-apt-get -y install python2.7-dev
+# Installeer evt. benodigde software.
+apt-get -y install python2.7-dev tightvncserver
 
-#installeer spidev
+# Installeer spidev
 wget https://github.com/Gadgetoid/py-spidev/archive/master.zip
 unzip master.zip
 rm master.zip
@@ -157,5 +157,22 @@ cd py-spidev-master
 sudo python setup.py install
 cd ..
 
+# Zet tightvncserver op
+clear
+echo "De installatie van han4pi is geslaagd. U dient enkel nog een tightvnc wachtwoord op te zetten."
+echo "Zodra u op enter drukt krijgt u tweemaal een wachtwoord invoervak, geef daar uw wachtwoord in."
+echo "Na het invoeren van het wachtwoord wordt er gevraagd of u een 'view-only' wachtwoord wilt instellen. Geef hier een N in."
+read null
 
+vncserver :1
 
+# Voeg tightvnc toe aan de opstartitems
+cp /home/"$USERNAME"/han4pi/bash/resources/tightvnc.desktop /home/"$USERNAME"/.config/autostart/
+
+# Voeg de games toe aan het menu
+echo "cd /home/$USERNAME/\"han4pi/python/games/Catch the raspberry\"/ && python2 game.py" >> /opt/catch_the_raspberry.sh
+cp "/home/$USERNAME/han4pi/python/games/Catch the raspberry/Images/icon.png" /usr/share/pixmaps/catch_the_raspberry.png
+cp /home/"$USERNAME"/han4pi/bash/resources/catch_the_raspberry.desktop /usr/share/applications/Catch_the_raspberry.desktop
+
+echo "cd /home/$USERNAME/\"han4pi/python/games/Catch the raspberry (controller)\"/ && python2 game.py" >> /opt/catch_the_raspberry_controller.sh
+cp /home/"$USERNAME"/han4pi/bash/resources/catch_the_raspberry_controller.desktop /usr/share/applications/Catch_the_raspberry_controller.desktop
