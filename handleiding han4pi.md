@@ -1,6 +1,6 @@
 # ![han4pi header](http://i.imgur.com/t5m5nSy.png)
 
-Han4pi is een groep enthusiaste studenten die samen met 1 leraar (Johan Korten) workshops organiseren met de Raspberry pi microcomputer. Dit doen zij voor de Hogeschool van Arnhem en Nijmegen (HAN).
+Han4pi is een groep van enthousiaste studenten die samen met 1 leraar (Johan Korten) workshops organiseren met de Raspberry pi microcomputer. Dit doen zij voor de Hogeschool van Arnhem en Nijmegen (HAN).
 
 ### Inhoud spelhandleiding:                                 
 * Opbouw programmeercode
@@ -19,7 +19,7 @@ Speler: Deze klasse regelt alle acties van de speler. Denk bijvoorbeeld aan het 
 * Hoofdmenu: Deze klasse tekent het hoofdmenu. Denk hierbij bijvoorbeeld aan het pijltje voor de geselecteerde optie.
 Scherm: De scherm klasse bevat alles wat op het scherm wordt getekend. Deze klasse regelt het tekenen van afbeeldingen, tekst en objecten (de bal en de speler).
 * Pongspel: Als de speler op "Start spel" drukt, wordt vervolgens de pongspel klasse aangeroepen. Deze zorgt ervoor dat het spel begint te draaien en de input van het toetsenbord wordt gelezen.
-* potMeter: Deze klassen regelt de input van de potentiometer (kort: potmeter). Een potentiometer is een spanningsdeler die een analog input terug geeft van 10 bits groot. Deze 10 bits (met de waarde van 0 tot 1023, dus 1024 waarden = 2^10) moeten worden omgezet zodat de locatie van de speler op het scherm wordt aangepast op basis van de input van de potmeter. Omdat het scherm waar de speler over beweegt geen 1024 pixels groot is moet de input van de potmeter worden omgezet naar pixels. 
+* potMeter: Deze klassen regelt de input van de potentiometer (kort: potmeter). Een potentiometer is een spanningsdeler die een analog einput terug geeft van 10 bits groot. Deze 10 bits (met de waarde van 0 tot 1023, dus 1024 waarden = 2^10) moeten worden omgezet zodat de locatie van de speler op het scherm wordt aangepast op basis van de input van de potmeter. Omdat het scherm waar de speler over beweegt geen 1024 pixels groot is moet de input van de potmeter worden omgezet naar pixels. 
 
 
 ### Instellingen:
@@ -36,7 +36,7 @@ Johan Korten (docent informatica aan de HAN) is de initiatiefnemer van dit proje
 ### Speldoel: 
 Het doel van het spel is om een (of meerdere) ballen heen en weer te slaan. Het spel heeft veel overeenkomsten met tafeltennis vandaar ook de naam van het spel 'Pong'. Het doel voor elke speler dient te zijn om het balletje terug te slaan voordat hij de grens van zijn kant van het speelveld is gepasseerd. Indien dit toch gebeurd dan wordt het balletje gereset en krijgt de andere speler (die gescoord heeft) een punt erbij. De kunst van het spel is dus om de bal op een dergelijke manier te spelen dat de tegenspeler niet in staat is om de bal op tijd terug te spelen. 
 
-Het spel dat dus zelf gebasseerd is op de 
+Het spel was razend populair in de jaren 70 en 80 van de vorige eeuw. De naam van 'pong' is afgeleid van ping pong, wat zelf weer een synoniem is voor tafeltennis. Pong is een van de eerst uitgebrachte computerspellen. Het was tevens een van de eerste computerspellen die een (groot) commercieel succes is geworden.
 
 
 
