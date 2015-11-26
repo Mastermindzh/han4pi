@@ -3,6 +3,10 @@ import time
 import os
 import sys
 
+# Open spi op poort...
+spi=spidev.SpiDev()
+spi.open(0,0)
+
 class PotMeter():
 	def __init__(potmeter, spelernummer, spelergrootte, schermhoogte):
 		potmeter.potmeternummer=spelernummer
