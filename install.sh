@@ -100,27 +100,29 @@ if [ "$SKIP" = false ]; then
 	echo $HOSTNAME > /etc/hostname
 	
 	# Verwijder oude han4pi map als die aanwezig is
-	rm -rf "/home/"$USERNAME"/han4pi"
+	rm -rf "/home/$USERNAME/han4pi"
 	
 	# Download nieuwe han4pi files
-	git clone https://github.com/Mastermindzh/han4pi.git "/home/"$USERNAME"/han4pi"
+	git clone https://github.com/Mastermindzh/han4pi.git "/home/$USERNAME/han4pi"
 	
+	#zet de rechten van de map goed
+	chown -R "$USERNAME":"$USERNAME" "/home/$USERNAME/han4pi"
 fi # End of skip
 
 # Controlleer of de scriptversies gelijk zijn.
-newver=$(bash "/home/"$USERNAME"/han4pi/install.sh"  -v)
+newver=$(bash "/home/$USERNAME/han4pi/install.sh"  -v)
 if [ "$newver" -ne "$VERSION" ]
 then
 	clear
 	echo -e ${RED}"Uw installatiescript is outdated."${NC}
-	echo "We zullen het nieuwe script gebruiken, dat kunt u vinden in: /home/"$USERNAME"/han4pi"
+	echo "We zullen het nieuwe script gebruiken, dat kunt u vinden in: /home/$USERNAME/han4pi"
 	echo "Druk op enter om door te gaan..."
 	read null
-	bash "/home/"$USERNAME"/han4pi/install.sh" -s
+	bash "/home/$USERNAME/han4pi/install.sh" -s
 fi
 
 # Verwijder het installatie script uit de gebruikersmap.
-	rm "/home/"$USERNAME"/han4pi/install.sh"
+	rm "/home/$USERNAME/han4pi/install.sh"
 
 # Stel de han4pi wallpaper in
 cp /home/"$USERNAME"/han4pi/bash/resources/wallpapers/wallpaper.jpg /usr/share/raspberrypi-artwork/han4pi.jpg
@@ -131,7 +133,7 @@ mkdir /home/"$USERNAME"/.han4pi
 cp /home/"$USERNAME"/han4pi/bash/greeter.sh /home/"$USERNAME"/.han4pi/greeter.sh
 
 # Zorg ervoor dat de greeter wordt uitgevoerd bij elke start van een terminal
-echo "bash /home/"$USERNAME"/.han4pi/greeter.sh" >> "/home/"$USERNAME"/.bashrc"
+echo "bash /home/$USERNAME/.han4pi/greeter.sh" >> "/home/$USERNAME/.bashrc"
 
 # Zet de keyboard map op US, de standaard in Nederland.
 setxkbmap us
@@ -167,7 +169,7 @@ read null
 vncserver :1
 
 # Voeg tightvnc toe aan de opstartitems
-cp /home/"$USERNAME"/han4pi/bash/resources/tightvnc.desktop /home/"$USERNAME"/.config/autostart/
+cp "/home/$USERNAME/han4pi/bash/resources/tightvnc.desktop" "/home/$USERNAME/.config/autostart/"
 
 # Voeg de games toe aan het menu
 echo "cd /home/$USERNAME/\"han4pi/python/games/Catch the raspberry\"/ && python2 game.py" >> /opt/catch_the_raspberry.sh
