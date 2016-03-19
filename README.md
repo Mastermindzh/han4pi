@@ -1,6 +1,6 @@
 ![han4pi header](http://i.imgur.com/t5m5nSy.png)
 
-Han4pi is een groep enthusiaste studenten die samen met 1 leraar (Johan Korten) workshops organiseren met de Raspberry pi microcomputer. Dit doen zij voor de Hogeschool van Arnhem en Nijmegen.
+Han4pi is een groep enthousiaste studenten die samen met 1 leraar (Johan Korten) workshops organiseren met de Raspberry Pi microcomputer. Dit doen zij voor de Hogeschool van Arnhem en Nijmegen.
 
 Gebruik een van de volgende links om door dit document te bladeren:
 
