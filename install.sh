@@ -178,6 +178,8 @@ cp "/home/$USERNAME/han4pi/bash/resources/tightvnc.desktop" "/home/$USERNAME/.co
 echo "cd /home/$USERNAME/\"han4pi/python/games/Catch the raspberry\"/ && python2 game.py" >> /opt/catch_the_raspberry.sh
 cp "/home/$USERNAME/han4pi/python/games/Catch the raspberry/Images/icon.png" /usr/share/pixmaps/catch_the_raspberry.png
 cp /home/"$USERNAME"/han4pi/bash/resources/catch_the_raspberry.desktop /usr/share/applications/Catch_the_raspberry.desktop
+cp /home/"$USERNAME"/han4pi/bash/resources/catch_the_raspberry.desktop /home/"$USERNAME"/Desktop/Catch_the_raspberry.desktop
 
 echo "cd /home/$USERNAME/\"han4pi/python/games/Catch the raspberry (controller)\"/ && python2 game.py" >> /opt/catch_the_raspberry_controller.sh
 cp /home/"$USERNAME"/han4pi/bash/resources/catch_the_raspberry_controller.desktop /usr/share/applications/Catch_the_raspberry_controller.desktop
+cp /home/"$USERNAME"/han4pi/bash/resources/catch_the_raspberry_controller.desktop /home/"$USERNAME"/Desktop/Catch_the_raspberry_controller.desktop

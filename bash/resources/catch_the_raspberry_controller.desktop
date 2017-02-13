@@ -1,6 +1,6 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
-Name=Catch the Raspberry 
+Name=Catch the Raspberry (controller)
 Type=Application
 Exec=bash /opt/catch_the_raspberry_controller.sh
 Icon=/usr/share/pixmaps/catch_the_raspberry.png
