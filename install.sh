@@ -159,6 +159,9 @@ cd py-spidev-master
 sudo python setup.py install
 cd ..
 
+# Zet SSH aan (staat op de nieuwe pi's standaard uit)
+systemctl enable ssh.service
+
 # Zet tightvncserver op
 clear
 echo "De installatie van han4pi is geslaagd. U dient enkel nog een tightvnc wachtwoord op te zetten."
