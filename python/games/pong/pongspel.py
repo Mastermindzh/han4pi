@@ -28,7 +28,7 @@ def startPong(scherm, aantalBallen):
 		if doQuit:
 			break
 		scherm.maakAchtergrondZwart() # hele achtergrond zwart
-		scherm.tekenTekst('Punten speler 1: '+str(scherm.speler1.punten),10,0)
+		scherm.tekenTekst('Punten speler 1: '+str(scherm.speler1.punten),10, 10)
 		scherm.tekenTekst('Punten speler 2: '+str(scherm.speler2.punten),scherm.scherm.get_width()-125,10)
 		if(scherm.winnaar!=0):
 			scherm.tekenTekst('Speler ' +str(scherm.winnaar)+ ' wint', 300,300)
