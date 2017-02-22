@@ -25,7 +25,7 @@ class Speler(pygame.sprite.Sprite):
                 pygame.event.pump()
 
         def beweeg(speler, snelheid): #bepaling van positie als de speler beweegt. Logischerwijs hoeft alleen de y positie aangepast te worden.
-                speler.bewegingsPosities[1] += snelheid
+                speler.bewegingsPosities[1] = snelheid
 
 if __name__ == '__main__':
 	sys.stderr.write("Jij kan mij besturen, maar niet op deze manier. Als ik jou was zou ik pong.py draaien.")

@@ -37,12 +37,12 @@ def startPong(scherm, aantalBallen):
 			if(aantalBallen == "2"):
 				scherm.balsprite2.update()#balsprite updaten
 				scherm.balsprite2.draw(scherm.scherm)#balsprite tekenen
-			speler1Beweging=potSpeler1.positieVerandering()
+			speler1Beweging=potSpeler1.positieVerandering(scherm.speler1.rect)
 			if(speler1Beweging==0.0):
 				scherm.speler1.bewegingsPosities = [0,0] #de speler mag niet meer bewegen
 			else:
 				scherm.speler1.beweeg(speler1Beweging)
-			speler2Beweging=potSpeler2.positieVerandering()
+			speler2Beweging=potSpeler2.positieVerandering(scherm.speler2.rect)
 			if(speler2Beweging==0.0):
 				scherm.speler2.bewegingsPosities = [0,0] #de speler mag niet meer bewegen
 			else:

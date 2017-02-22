@@ -30,6 +30,9 @@ def hoofdmenu(scherm, menu,
 	klok = pygame.time.Clock() #Maak de klok aan
 	opvuller = pygame.Surface.copy(scherm.scherm) #maak een vakje aan die steeds over de vorige positie van het pijltje (>) wordt getekend 
 	opvullervierkant = opvuller.get_rect() 
+	
+	print "Welkom bij pong!"
+	
 	while True:
 		klok.tick(30)
 		if pijltjeIngedrukt == True: #Nadat er op pijltje omhoog of pijltje omlaag is gedrukt moet de opvuller over de oude positie van het pijltje worden getekend. Ook wordt hier het nieuwe pijltje getekend.
