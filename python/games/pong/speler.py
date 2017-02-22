@@ -17,6 +17,8 @@ class Speler(pygame.sprite.Sprite):
                         speler.rect.midleft = speler.grenzen.midleft
                 elif speler.kant == "rechts": # stel de grenzen voor de rechter speler in
                         speler.rect.midright = speler.grenzen.midright
+                elif speler.kant == "midden":
+						speler.rect.midleft = speler.grenzen.midleft
 
         def update(speler): # speler update (wordt iedere loop aangeroepen)
                 nieuwePositie = speler.rect.move(speler.bewegingsPosities) # bepaal de nieuwe positie van de speler

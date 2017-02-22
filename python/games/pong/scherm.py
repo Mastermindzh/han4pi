@@ -10,6 +10,7 @@ class Scherm():
 			schermobject.achtergrond=schermobject.maakAchtergrondAan()
 			schermobject.speler1 = spelerklasse.Speler(schermobject, "links") # linker speler aanmaken
 			schermobject.speler2 = spelerklasse.Speler(schermobject, "rechts") # rechter speler aanmaken
+			schermobject.speler3 = spelerklasse.Speler(schermobject, "midden") # middelste speler aanmaken
 			schermobject.bal = balklasse.Bal((0.47,3),schermobject.speler1,schermobject.speler2, schermobject) # maak de bal aan. Eerste arhument is de positie, tweede de beweging (hoek en snelheid) en de 2 spelers worden meegegeven
 			schermobject.bal2 = balklasse.Bal((2.67,3),schermobject.speler1,schermobject.speler2, schermobject)
 			schermobject.bal2.rect=schermobject.bal2.rect.move(schermobject.scherm.get_width()-25,0)
