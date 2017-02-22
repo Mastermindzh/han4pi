@@ -163,6 +163,9 @@ cd ..
 # Zet SSH aan (staat op de nieuwe pi's standaard uit)
 systemctl enable ssh.service
 
+# Zet een alias om snel Han4pi te kunnen clonen
+echo "alias gethan4pi='git clone https://github.com/Mastermindzh/han4pi.git'" >> ~/.bashrc
+
 # Zet tightvncserver op
 clear
 echo "De installatie van han4pi is geslaagd. U dient enkel nog een tightvnc wachtwoord op te zetten."
