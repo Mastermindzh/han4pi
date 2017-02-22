@@ -10,8 +10,8 @@ class Scherm():
 			schermobject.achtergrond=schermobject.maakAchtergrondAan()
 			schermobject.speler1 = spelerklasse.Speler(0, schermobject, "links") # linker speler aanmaken
 			schermobject.speler2 = spelerklasse.Speler(1, schermobject, "rechts") # rechter speler aanmaken
-			schermobject.bal = balklasse.Bal((0.47,3),schermobject.speler1,schermobject.speler2, schermobject) # maak de bal aan. Eerste arhument is de positie, tweede de beweging (hoek en snelheid) en de 2 spelers worden meegegeven
-			schermobject.bal2 = balklasse.Bal((2.67,3),schermobject.speler1,schermobject.speler2, schermobject)
+			schermobject.bal = balklasse.Bal((0.47,3), schermobject) # maak de bal aan. Eerste arhument is de positie, tweede de beweging (hoek en snelheid) en de 2 spelers worden meegegeven
+			schermobject.bal2 = balklasse.Bal((2.67,3), schermobject)
 			schermobject.bal2.rect=schermobject.bal2.rect.move(schermobject.scherm.get_width()-25,0)
 			schermobject.bal2.geraakt=False 
 			schermobject.spelersprite = pygame.sprite.RenderPlain((schermobject.speler1, schermobject.speler2)) # de sprite van de speler voor het tekenen op het scherm
