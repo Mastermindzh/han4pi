@@ -11,6 +11,7 @@ class Speler(pygame.sprite.Sprite):
                 speler.kant = kant # de kant van de speler (speler 1 heeft kant links, speler 2 heeft kant rechts)
                 speler.bewegingsPosities = [0,0] # de bewegingsposities van de speler
                 speler.stelPositiesIn() # stel de positie van de speler in
+                speler.afstand = 0
 
         def stelPositiesIn(speler):#stel de positie van de speler in
                 if speler.kant == "links": # stel de grenzen voor de linker speler in
@@ -26,6 +27,8 @@ class Speler(pygame.sprite.Sprite):
 
         def beweeg(speler, snelheid): #bepaling van positie als de speler beweegt. Logischerwijs hoeft alleen de y positie aangepast te worden.
                 speler.bewegingsPosities[1] = snelheid
+                if(abs(snelheid)>5):
+					speler.afstand+=abs(snelheid)
 
 if __name__ == '__main__':
 	sys.stderr.write("Jij kan mij besturen, maar niet op deze manier. Als ik jou was zou ik pong.py draaien.")
