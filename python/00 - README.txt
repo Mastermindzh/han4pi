@@ -1,4 +1,4 @@
-Als je een bestand in deze map wilt gebruiken dan wordt het aanbevolen om deze over te typen of over te kopiëren in plaats van direct erin te werken.
+Voor het gebruik van bestanden in deze map wordt het aanbevolen om deze over te typen of over te kopiëren in plaats van direct ermee te werken.
 
 De mappen:
 
