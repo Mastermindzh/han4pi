@@ -1,8 +1,8 @@
-import pygame, sys
+import pygame, sys, potmeter
 
 class Speler(pygame.sprite.Sprite):
 
-        def __init__(speler, scherm, kant):
+        def __init__(speler, spelernummer, scherm, kant):
                 pygame.sprite.Sprite.__init__(speler) # initialiseer de sprite
                 speler.image, speler.rect = scherm.laad_afbeelding('padje.png') # gebruik de methode laad_afbeelding om de afbeelding in te laden en de grootte hiervan
                 scherm = pygame.display.get_surface() # een variabele binnen de speler voor het scherm zodat deze op de volgende regel gebruikt kan worden
@@ -12,6 +12,7 @@ class Speler(pygame.sprite.Sprite):
                 speler.bewegingsPosities = [0,0] # de bewegingsposities van de speler
                 speler.stelPositiesIn() # stel de positie van de speler in
                 speler.afstand = 0
+                speler.potMeter = potmeter.PotMeter(spelernummer, speler.rect[1], scherm.get_height())
 
         def stelPositiesIn(speler):#stel de positie van de speler in
                 if speler.kant == "links": # stel de grenzen voor de linker speler in
@@ -25,10 +26,14 @@ class Speler(pygame.sprite.Sprite):
                         speler.rect = nieuwePositie 
                 pygame.event.pump()
 
-        def beweeg(speler, snelheid): #bepaling van positie als de speler beweegt. Logischerwijs hoeft alleen de y positie aangepast te worden.
-                speler.bewegingsPosities[1] = snelheid
-                if(abs(snelheid)>5):
-					speler.afstand+=abs(snelheid)
+        def beweeg(speler): #bepaling van positie als de speler beweegt. Logischerwijs hoeft alleen de y positie aangepast te worden.
+			spelerBeweging=speler.potMeter.positieVerandering(speler.rect)
+			if(spelerBeweging==0.0):
+				speler.bewegingsPosities = [0,0] #de speler mag niet meer bewegen
+			else:
+				speler.bewegingsPosities[1] = spelerBeweging
+			if(abs(spelerBeweging)>5):
+					speler.afstand+=abs(spelerBeweging)
 
 if __name__ == '__main__':
 	sys.stderr.write("Jij kan mij besturen, maar niet op deze manier. Als ik jou was zou ik pong.py draaien.")
