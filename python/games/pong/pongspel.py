@@ -13,9 +13,7 @@ def startPong(scherm, aantalBallen):
         pygame.display.set_caption('HAN4PI Pong') # naam van het programma
 
 	klok = pygame.time.Clock()
-	potSpeler1 = potmeter.PotMeter(0, scherm.speler1.rect[1], scherm.scherm.get_height())
-	potSpeler2 = potmeter.PotMeter(1, scherm.speler2.rect[1], scherm.scherm.get_height())
-
+	
         while 1:
 		klok.tick(60)
 		doQuit = False
@@ -34,19 +32,14 @@ def startPong(scherm, aantalBallen):
 			scherm.tekenTekst('Speler ' +str(scherm.winnaar)+ ' wint', 300,300)
 		else:
 			scherm.balsprite.update()#balsprite updaten
-			if(aantalBallen == "2"):
+			if(aantalBallen == 2):
 				scherm.balsprite2.update()#balsprite updaten
 				scherm.balsprite2.draw(scherm.scherm)#balsprite tekenen
-			speler1Beweging=potSpeler1.positieVerandering(scherm.speler1.rect)
-			if(speler1Beweging==0.0):
-				scherm.speler1.bewegingsPosities = [0,0] #de speler mag niet meer bewegen
-			else:
-				scherm.speler1.beweeg(speler1Beweging)
-			speler2Beweging=potSpeler2.positieVerandering(scherm.speler2.rect)
-			if(speler2Beweging==0.0):
-				scherm.speler2.bewegingsPosities = [0,0] #de speler mag niet meer bewegen
-			else:
-				scherm.speler2.beweeg(speler2Beweging)
+			
+			scherm.speler1.beweeg()
+			scherm.speler2.beweeg()
+			scherm.speler3.beweeg()
+			
 			scherm.spelersprite.update()#spelersprite updaten
 			scherm.balsprite.draw(scherm.scherm)#balsprite tekenen
 			scherm.spelersprite.draw(scherm.scherm)#spelersprite tekenen
