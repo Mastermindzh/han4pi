@@ -10,7 +10,6 @@ spi.open(0,0)
 class PotMeter():
 	def __init__(potmeter, spelernummer, spelergrootte, schermhoogte):
 		potmeter.potmeternummer=spelernummer
-		# potmeter.vorigewaarde=1023/2
 		potmeter.spelergrootte=spelergrootte
 		potmeter.schermhoogte=schermhoogte
 		
@@ -24,9 +23,7 @@ class PotMeter():
 	def readadc(potmeter, adcnum):
 		if((adcnum > 7) or (adcnum < 0)):
 			return -1
-		# r = spi.xfer2([1,(8+adcnum)<<4,0])
 		r = spi.xfer([1, (8+adcnum)<<4,0])
-		# adcout = ((r[1]&3)<< 8) +r[2]
 		adcout = ((r[1]*256)+r[2])*1.023
 		return adcout
 

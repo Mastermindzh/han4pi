@@ -26,12 +26,9 @@ class Bal(pygame.sprite.Sprite): # de bal klasse
 			if (tr and tl) or (br and bl): #wanneer de bal in de hoek over 2 grenzen heen gaat ketst deze recht af
 				hoek = -hoek
 			if tl and bl: #wanneer de bal aan de linkerkant uit het scherm gaat
-				#bal.speler2.punten += 1 # speler 2 krijgt een punt!!!
 				bal.rect, bal.speler2.punten, hoek, z = bal.scoorBal(bal.speler2.punten, hoek, 2) #beweeg de bal naar aanleiding van de beweging
 				
 			if tr and br: #wanneer de bal aan de rechterkant uit het scherm gaat
-				#hoek = math.pi - hoek # eenvoudige hoekberekening voor het afketsen van de bal
-				#bal.speler1.punten += 1# speler 1 krijgt een punt!!!
 				bal.rect, bal.speler1.punten, hoek, z = bal.scoorBal(bal.speler1.punten, hoek, 1) #beweeg de bal naar aanleiding van de beweging
 	    
 		else:

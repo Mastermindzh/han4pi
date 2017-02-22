@@ -9,10 +9,10 @@ class Speler(pygame.sprite.Sprite):
                 speler.grenzen = scherm.get_rect()#de grenzen van de speler zijn gelijk aan de grenzen van het scherm
                 speler.punten = 0 # de speler begint met nul punten
                 speler.kant = kant # de kant van de speler (speler 1 heeft kant links, speler 2 heeft kant rechts)
+                speler.bewegingsPosities = [0,0] # de bewegingsposities van de speler
                 speler.stelPositiesIn() # stel de positie van de speler in
 
         def stelPositiesIn(speler):#stel de positie van de speler in
-                speler.bewegingsPosities = [0,0] # de bewegingsposities van de speler
                 if speler.kant == "links": # stel de grenzen voor de linker speler in
                         speler.rect.midleft = speler.grenzen.midleft
                 elif speler.kant == "rechts": # stel de grenzen voor de rechter speler in
