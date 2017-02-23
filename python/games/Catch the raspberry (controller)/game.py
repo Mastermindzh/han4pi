@@ -38,7 +38,7 @@ def readadc(adcnum):
 
 # Start pygame en maak een scherm
 init() 													# Start pygame
-display.set_caption('Catch the raspberry!')				# Zet de titel van het venster
+display.set_caption('Mand rasberry')				# Zet de titel van het venster
 display.set_icon(image.load("Images/icon.png"))			# Zet het icoon van het spel
 bg = image.load("Images/background.png")
 
@@ -68,7 +68,7 @@ font_medium 	= font.SysFont("monospace", 20)
 
 # Bal instellingen
 bal 				= image.load("Images/bal.png") 						# Het plaatje van de bal toewijzen		
-standaard_snelheid	= 5;												# Standaardsnelheid van de bal toewijzen. Hiermee wordt de snelheid ook verhoogt
+standaard_snelheid	= 10;												# Standaardsnelheid van de bal toewijzen. Hiermee wordt de snelheid ook verhoogt10
 speed 				= [0, standaard_snelheid]							# Balsnelheid [horizontaal, verticaal]
 bal_sneller_naar	= 100												# Het aantal punten waar een snelheidsverhoging ingaat.
 balrect 			= bal.get_rect() 									# Sla het vierkant van de bal op (makkelijk voor intersects)
@@ -79,10 +79,16 @@ emmer 				= image.load("Images/bucket.png") 	# Het plaatje van de emmer toewijze
 emmerrect 			= emmer.get_rect()					# Sla het vierkant van de emmer op (makkelijk voor intersects)
 emmerrect.centery 	= height -100						# Y positie van de emmer
 
+
+# Emmer2 instellingen
+emmer2				= image.load("Images/bucket.png") 	# Het plaatje van de emmer toewijzen
+emmerrect2 			= emmer2.get_rect()					# Sla het vierkant van de emmer op (makkelijk voor intersects)
+emmerrect2.centery 	= height -100						# Y positie van de emmer
+
 # Overige instellingen
 score 	= 0			# De startscore
 vorige_score = 0	# De score bij de vorige snelheidsverhoging.
-life 	= 3			# Het aantal levens dat nog over is.
+life 	= 5			# Het aantal levens dat nog over is.
 
 # Kleuren
 WIT = (255,255,255)
@@ -124,10 +130,25 @@ def beweegEmmer():
 		trim_pot = width - emmer.get_size()[0]/2
 	emmerrect.centerx=trim_pot
 
+# Muisbeweging van de emmer2
+def beweegEmmer2():
+	global last_read , emmerrect2, emmer2
+	trim_pot = readadc (2)
+
+	# Check of de emmer2 te ver naar links zit
+	if(trim_pot < emmer2.get_size()[0]/2):
+		trim_pot = emmer2.get_size()[0]/2 + 2
+	# Check of de emmer2 te ver naar rechts zit
+	if(trim_pot > width - emmer2.get_size()[0]/2):
+		trim_pot = width - emmer2.get_size()[0]/2
+	emmerrect2.centerx=trim_pot
 
 #beweeg de bal
 def beweegBal():
-	global balrect,speed #we willen de variabele boven aan het script gebruiken
+	global balrect,speed, emmerrect #we willen de variabele boven aan het script gebruiken
+	speed[0]=(readadc(1)-500.00)/50.00
+	if((balrect.x>380 and speed[0]>0) or (balrect.x<0 and speed[0]<0)):
+		speed[0]=0
 	balrect = balrect.move(speed)
 
 # Als de onderkant van de bal voorbij of op de hoogte van het scherm is.
@@ -143,6 +164,15 @@ def checkBalGevangen():
 	global score,balrect
 	if (balrect.bottom > emmerrect.top and balrect.top < emmerrect.bottom) and (emmerrect.right > balrect.centerx and emmerrect.left < balrect.centerx):
 		score += 10
+		balrect.centerx = randint(50,scherm_breedte)
+		balrect.centery = 0	
+		
+		
+# Controlleer of de bal gevangen is
+def checkBalGevangen2():
+	global score,balrect
+	if (balrect.bottom > emmerrect2.top and balrect.top < emmerrect2.bottom) and (emmerrect2.right > balrect.centerx and emmerrect2.left < balrect.centerx):
+		score += -10
 		balrect.centerx = randint(50,scherm_breedte)
 		balrect.centery = 0	
 		
@@ -181,6 +211,7 @@ def tekenScherm():
 	scherm.blit(bg,(0,0))
 	scherm.blit(bal, balrect)			# Teken de bal
 	scherm.blit(emmer, emmerrect)		# Teken de emmer	
+	scherm.blit(emmer2, emmerrect2)		# Teken de emmer2	
 	scherm.blit(scorelabel, (25, 25))	# Teken het scorelabel
 	tekenLevens()						# Teken de hartjes
 	display.update() 					# Teken het scherm
@@ -199,9 +230,11 @@ while 1:
 		wachtOpQuit() # controlleer of de gebruiker het spel wil afsluiten
 	
 	beweegEmmer() 				# controlleer of de emmer moet bewegen	
+	beweegEmmer2() 				# controlleer of de emmer2 moet bewegen	
 	beweegBal() 				# Beweeg de bal
 	checkBalVoorbijEmmer() 		# Controlleer of de bal voorbij de emmer is.
 	checkBalGevangen()			# Controlleer of de bal gevangen is
+	checkBalGevangen2()			# Controlleer of de bal gevangen is
 	controlleerVersnelling()	# Controlleer of de bal versneld moet worden
 	tekenScherm()				# Teken alles op het scherm
 	controlleerLevens()			# Controlleer of er nog levens over zijn.
