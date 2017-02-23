@@ -53,10 +53,7 @@ class Bal(pygame.sprite.Sprite): # de bal klasse
 					bal.scherm.winnaar=spelernummer
                 (dx,dy) = (-bal.rect[0]+(bal.scherm.scherm.get_width()/2),-bal.rect[1]+(bal.scherm.scherm.get_height()/2)) # de x en y waarmee de bal zal gaan bewegen worden bepaald op basis van sin en cos
                 hoek = math.pi - hoek # eenvoudige hoekberekening voor het afketsen van de bal
-                if(hoek>math.pi/2 or hoek<-math.pi/2):
-                		bal.geraakt = bal.scherm.speler2.potMeter.potmeternummer
-                else:
-                		bal.geraakt = bal.scherm.speler1.potMeter.potmeternummer
+                bal.geraakt = 5
                 return bal.rect.move(dx,dy), punten, hoek, 3
 
 if __name__ == '__main__':
